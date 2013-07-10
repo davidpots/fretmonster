@@ -48,7 +48,7 @@
         @media (min-width: 768px) { 
           .content { width: 768px; margin: 0 auto; } 
         }
-        
+
         /* If you want full width content no matter what, 
            add class '.content-full' to any 'div.content' */
-        .content-full   { margin: 0; width: auto; }
+        .content-full   { margin: 0; width: 100%; }
