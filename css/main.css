@@ -11,7 +11,7 @@
 
         body { 
           color: #333;
-          font-family: 'Merriweather', serif;
+          font-family: 'Open Sans', sans-serif;
           font-size: 16px;
           line-height: 24px; }
 
@@ -19,7 +19,7 @@
 
         a  { color: #f05a28; }
 
-        h1,h2,h3,h4,h5,h6 { font-family: Lato, sans-serif; font-weight: 800; color: #222; margin: 28px 0 20px 0; }
+        h1,h2,h3,h4,h5,h6 { font-weight: 700; color: #222; margin: 28px 0 20px 0; }
 
         h1      { font-size: 40px; line-height: 40px; }
         h2      { font-size: 32px; line-height: 32px; }
