@@ -1,0 +1,39 @@
+/* -- SETUP -- */
+
+        * {
+        	margin: 0;
+        	padding: 0;
+        	position: relative;
+        	-webkit-box-sizing: border-box;
+        	   -moz-box-sizing: border-box;
+        	        box-sizing: border-box;
+        }
+
+        body { 
+          color: #333;
+          font-family: 'Open Sans', sans-serif;
+          font-size: 18px;
+          font-weight: 400; 
+          line-height: 26px; }
+
+/* -- GENERAL TYPOGRAPHY -- */
+
+        a  { text-decoration: none; color: #0067b7; }
+
+        h1,h2,h3,h4,h5,h6 { color: #222; margin: 28px 0 20px 0; }
+
+        h1      { font-size: 40px; line-height: 40px; }
+        h2      { font-size: 32px; line-height: 32px; }
+        h3      { font-size: 24px; line-height: 24px; }
+        h4      { font-size: 21px; line-height: 21px; }
+        h5      { font-size: 18px; line-height: 18px; }
+        h6      { font-size: 18px; line-height: 18px; }
+
+        p       { margin: 20px 0 20px 0; }
+        ul,ol   { margin: 28px 0 24px 28px; }
+
+/* -- LAYOUT -- */
+
+        .section        { padding: 20px; }
+        .content        { width: 800px; margin: 0 auto; }
+        .content-full   { margin: 0; width: auto; }
