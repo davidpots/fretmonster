@@ -27,6 +27,8 @@
       <div class="section">
         <div class="content">
 
+          <p><a href="index.html">&laquo; back to homepage</a></p>
+
           <h1>Header Level 1</h1>
           <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
           <p>Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
@@ -55,25 +57,63 @@
   }</pre>
           <h4>Regular h4</h4>
           <p>Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Etiam porta sem malesuada magna mollis euismod.</p>
+          <table>
+          	<thead>
+          		<tr>
+          			<th>The Doors</th>
+          			<th>Jimmy Buffett</th>
+          			<th>Bob Dylan</th>
+          			<th>Cat Stevens</th>
+          		</tr>
+          	</thead>
+          	<tbody>
+          		<tr>
+          			<td>Strange Days</td>
+          			<td>A1A</td>
+          			<td>Blonde on Blonde</td>
+          			<td>Tea for the Tillerman</td>
+          		</tr>
+          		<tr>
+          			<td>Waiting for the Sun</td>
+          			<td>Barometer Soup</td>
+          			<td>Nashville Skyline</td>
+          			<td>Catch Bull at Four</td>
+          		</tr>
+          		<tr>
+          			<td>Morrison Hotel</td>
+          			<td>Fruitcakes</td>
+          			<td>Time Out of Mind</td>
+          			<td>Teaser and the Firecat</td>
+          		</tr>
+          	</tbody>
+          </table>
           <h5>Regular h5</h5>
           <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
         </div> <!-- end: .content -->
       </div> <!-- end: .section -->
 
-      <div class="section" style="background: #eee;">
+      <div class="section" style="background: #f6f6f6;">
         <div class="content content-full">
-          <h2>Full-Bleed Content</h2>
-          <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Donec id elit non mi porta gravida at eget metus. Donec ullamcorper nulla non metus auctor fringilla.</p>
+          <h2>Full-Width Content</h2>
+          <p>If you want content that expands to the far edges of the screen no matter what, add the class <code>content-full</code> to any existing <code>&lt;div class="content"&gt;</code>. Also, you can customize the background color of the row by giving desired background styles to <code>&lt;div class="section"&gt;</code>.</p>
+          <p>The markup structure for a full-width section should look like this:</p>
 <pre>
-  &lt;div class="layer" style="background: #eee;"&gt;
+  &lt;div class="section" style="background: #eee;"&gt;
+    &lt;div class="content content-full"&gt;
 
-    &lt;!-- content goes here --&gt;
+      &lt;!-- content goes here --&gt;
 
+    &lt;/div&gt;
   &lt;/div&gt;
 </pre>
-          <p>Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>You can also have back-to-back full-width sections.</p>
       
+        </div> <!-- end: .content .content-full -->
+      </div> <!-- end: .section -->
+      <div class="section" style="background: #333; color: #ddd;">
+        <div class="content content-full">
+          <p>You can also have back-to-back full-width sections. Follow the specs described above (and simply give styles for a different background color).</p>
         </div> <!-- end: .content .content-full -->
       </div> <!-- end: .section -->
       
@@ -83,8 +123,8 @@
           <h2>Wrapped Content</h2>
           <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
 <pre>
-  &lt;div class="layer"&gt;
-    &lt;div class="wrapper"&gt;
+  &lt;div class="section"&gt;
+    &lt;div class="content"&gt;
 
       &lt;!-- content goes here --&gt;
 
@@ -92,6 +132,9 @@
   &lt;/div&gt;
 </pre>
           <p>Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+
+          <p><a href="index.html">&laquo; back to homepage</a></p>
+
         </div> <!-- end: .content -->
       </div> <!-- end: .section -->
 
