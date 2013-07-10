@@ -30,9 +30,11 @@
 
         p         { margin: 20px 0 20px 0; }
         ul,ol     { margin: 28px 0 24px 28px; }
-        pre,code  { font-size: 15px; line-height: 20px; }
         
-        table     { border-collapse: collapse;}
+        pre,code  { font-size: 15px; line-height: 20px; }
+        pre       { overflow: auto; }
+        
+        table     { border-collapse: collapse; table-layout:fixed; width:100%; }
         td,th     { padding: 8px 9px 7px; font-size: 14px; line-height: 17px; border: 1px solid #aaa; text-align: left; }
         th        { background: #eee; }
         td        { font-size: 13px; }
