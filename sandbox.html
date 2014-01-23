@@ -12,12 +12,8 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="css/_reset_normalize.css">
-    <link rel="stylesheet" href="css/_reset_html5boilerplate.css">
-    <link rel="stylesheet" href="css/main.css">
-
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Javascripts -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -26,7 +22,7 @@
   </head>
   <body>
     
-    <div class="section">
+    <section>
       <div class="content">
 
         <p><a href="index.html">&laquo; back to Wisp homepage</a></p>
@@ -45,25 +41,25 @@
         <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
       </div> <!-- end: .content -->
-    </div> <!-- end: .section -->
+    </section>
 
-    <div class="section" style="background: #eee;">
+    <section style="background: #eee;">
       <div class="content content-full">
         <h2>Full-Width Content</h2>
         <p>If you want content that expands to the far edges of the screen no matter what, add the class <code style="background:#fff;">content-full</code> to any existing <code style="background:#fff;">&lt;div class="content"&gt;</code>. Also, you can customize the background color of the row by giving desired background styles to <code style="background:#fff;">&lt;div class="section"&gt;</code>.</p>
         <p>It's that easy.</p>
         <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
       </div> <!-- end: .content .content-full -->
-    </div> <!-- end: .section -->
+    </section>
 
-    <div class="section" style="background: #333; color: #ddd;">
+    <section style="background: #333; color: #ddd;">
       <div class="content content-full">
         <p>You can also have back-to-back full-width sections. Follow the specs described above (and simply give styles for a different background color).</p>
       </div> <!-- end: .content .content-full -->
-    </div> <!-- end: .section -->
+    </section>
     
 
-    <div class="section">
+    <section>
       <div class="content">
         <h2>Scaffolding</h2>
         <p>For content that you want centered in a single column (defaults to 768px), wrap your content in the following markup. If you want to change the background color of the entire row (but keep the content in the centered column), simply apply the desired styles to the <code>&lt;div class="section"&gt;</code> chunk.</p>
@@ -78,13 +74,13 @@
 </pre>
         <p>If you want your content to span across the full width of the device, simply add <code>content-full</code> to the existing <code>&lt;div class="content"&gt;</code> chunk. In the example below, I am telling the horizontal row to have a different background color (optional).</p>
 <pre>
-&lt;div class="section" style="background: #eee;"&gt;
+&lt;section style="background: #eee;"&gt;
   &lt;div class="content content-full"&gt;
 
     &lt;!-- content goes here --&gt;
 
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/section&gt;
 </pre>
 
         <h2>Preformatted Text and Code</h2>
@@ -162,7 +158,7 @@ height: 80px;
         <p><a href="index.html">&laquo; back to Wisp homepage</a></p>
 
       </div> <!-- end: .content -->
-    </div> <!-- end: .section -->
+    </section>
 
   </body>
 </html>

@@ -1,8 +1,7 @@
 /* -- SETUP -- */
 
         * {
-        	margin: 0;
-        	padding: 0;
+        	margin: 0; padding: 0;
         	position: relative;
         	-webkit-box-sizing: border-box;
         	   -moz-box-sizing: border-box;
@@ -11,28 +10,28 @@
 
         body { 
           color: #555;
-          font-family: 'Open Sans', sans-serif;
+          font-family: 'Helvetica Neue', sans-serif;
           font-size: 16px;
-          line-height: 24px; }
+          line-height: 1.4; }
 
 /* -- GENERAL TYPOGRAPHY -- */
 
         a  { color: #f05a28; }
 
-        h1,h2,h3,h4,h5,h6 { font-weight: 600; color: #444; margin: 28px 0 20px 0; }
+        h1,h2,h3,h4,h5,h6 { color: #444; margin: 0 0 20px 0; }
 
-        h1      { font-size: 40px; line-height: 40px; }
-        h2      { font-size: 32px; line-height: 32px; }
-        h3      { font-size: 24px; line-height: 24px; }
-        h4      { font-size: 21px; line-height: 21px; }
-        h5      { font-size: 18px; line-height: 18px; }
-        h6      { font-size: 18px; line-height: 18px; }
+        h1      { font-size: 40px; }
+        h2      { font-size: 32px; }
+        h3      { font-size: 24px; }
+        h4      { font-size: 21px; }
+        h5      { font-size: 18px; }
+        h6      { font-size: 18px; }
 
         p         { margin: 20px 0 20px 0; }
         
         ul,ol     { margin: 0 0 20px 28px; padding: 0; }
         dl        { margin: 0 0 20px 0; }
-        dl dt     { font-weight: 600; color: #444; margin-bottom: 4px; }
+        dl dt     { font-weight: bold; color: #444; margin-bottom: 4px; }
         dl dd     { margin-bottom: 0px; margin-left: 24px; }
         
         pre,code  { font-size: 15px; line-height: 20px; font-family: 'Andale Mono', monospace; }
@@ -46,16 +45,5 @@
 
 /* -- LAYOUT -- */
 
-        /* A section is a horiztonal band/stripe/row on the page. 
-           Defaults to the <body> bg color but can have its own color. */
-        .section        { padding: 20px; }
-        
-        /* If the page is at least 768px, center the content at that width. 
-           Otherwise it will be 100% wide. */
-        @media (min-width: 768px) { 
-          .content { width: 768px; margin: 0 auto; } 
-        }
-
-        /* If you want full width content no matter what, 
-           add class '.content-full' to any 'div.content' */
-        .content-full   { margin: 0; width: 100%; }
+        section   { padding: 20px; }
+        .content  { max-width: 940px; margin: auto; }
