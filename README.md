@@ -12,4 +12,4 @@ I wanted to make something myself, as lightweight as possible, built entirely fo
 
 I modeled the core of Wisp on [HTML5 Boilerplate](http://html5boilerplate.com/), after stripping away a lot of markup I don't usually need when quickly throwing together prototypes.
 
-Have yourself a good day.
+Have yourself a good day!
