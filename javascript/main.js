@@ -5,6 +5,7 @@ var major             = 'o-o-oo-o-o-o',
     pentatonic_major  = 'o-o-o--o-o--',
     pentatonic_minor  = 'o--o-o-o--o-';
 
+var fretboardLength;
 var grid = {
               1 : '',
               2 : '',
@@ -13,6 +14,7 @@ var grid = {
               5 : '',
               6 : ''      
            },
+      notes = [ 'E','F','F#','G','G#','A','A#','B','C','C#','D','D#' ],
     keyDiff = { 
                 'E'  : 0,
                 'F'  : 1,
@@ -56,6 +58,15 @@ var grid = {
                     6 : 0   // E string (low)
                  };
 
+var wrapper =  "<div class='fretboard'>\
+                  <div class='string' data-string-num='1' data-string-name='E'></div>\
+                  <div class='string' data-string-num='2' data-string-name='B'></div>\
+                  <div class='string' data-string-num='3' data-string-name='G'></div>\
+                  <div class='string' data-string-num='4' data-string-name='D'></div>\
+                  <div class='string' data-string-num='5' data-string-name='A'></div>\
+                  <div class='string' data-string-num='6' data-string-name='E'></div>\
+                </div>";
+
 function tonify(scale) {
   // Convert scale string to an array
   scale = scale.split('');
@@ -65,16 +76,19 @@ function tonify(scale) {
     tone = i+1;
     if (obj == 'o') {
       scale[i] = toneMap[tone];
+    } else {
+      scale[i] = '';
     }
   });
   return scale;
 }
 
 function generateFretboard(scale,key,length) {
+  fretboardLength = length;
 
   // Accepts (1) a scale, (2) a desired key, and (3) the desired length of the fretboard
   //
-  // Example:   changeKey(major,'G',18)
+  // Example:   generateFreboard(major,'G',18)
   // Returns:   ["6", "-", "7", "1", "-", "2", "-", "3", "4", "-", "5", "-", "6", "-", "7", "1", "-", "2"]
   //
   // The first item in the returned array is understood to be the 0th fret (i.e., open) on the string.
@@ -93,8 +107,47 @@ function generateFretboard(scale,key,length) {
     // Extend/shorten the scale to match desired length
     fullString = fullString.concat(fullString).slice(0,length);
     grid[i] = fullString;
+    
+
     console.log(grid[i]);
-  }
-  console.log('---');
-      
+  }      
 }
+
+$(document).ready(function(){
+  
+  // Generate an initial fretboard
+  generateFretboard(major,'G',18);
+  
+  // Generate the placeholder Fretboard wrapper
+  $('body').append(wrapper);
+  
+
+});
+
+$(window).on('load', function(){
+  // Populate each string
+  $('.fretboard .string').each(function(i,string){
+    
+    $(grid[i+1]).each(function(x,fret){
+      $(string).append("<div class='fret p1 inline-block align-center bg-light-grey' data-note='' data-interval='" + fret + "'>" + fret + "</div>");
+    });
+    // Identify the open (first) note on each string
+    $(string).find('.fret').first().addClass('open').addClass('bg-medium-grey');
+    // Make empty cells have no interval, &nbsp;
+    $(string).find('.fret').each(function(a,b){
+      if ( $(b).data('interval') == "") {
+        $(b).attr('data-interval','nil').html('&nbsp;');
+      } 
+    });
+    
+    // Give each cell it's note
+    var extendedNotes = notes.concat(notes);
+    frontLop = extendedNotes.slice( 0, (12 - stringDiff[i+1]) );
+    backLop = extendedNotes.slice( (12 - stringDiff[i+1]), extendedNotes.length );
+    extendedNotes = backLop.concat(frontLop);
+    $(string).find('.fret').each(function(a,b){
+      $(b).attr('data-note', extendedNotes[a]);
+    });
+
+  });
+});

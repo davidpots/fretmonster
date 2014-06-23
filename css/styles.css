@@ -1,1 +1,11 @@
-/* -- Your Styles Here -- */
+.inline-block { display: inline-block; }
+
+.align-center { text-align: center; }
+
+.p1 { padding: 1rem; }
+
+.bg-light-grey { background-color: #eee; }
+
+.bg-medium-grey { background-color: #aaa; }
+
+.fret { width: 3rem; }
