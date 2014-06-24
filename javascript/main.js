@@ -65,6 +65,7 @@ var wrapper =  "<div class='fretboard'>\
                   <div class='string' data-string-num='4' data-string-name='D'></div>\
                   <div class='string' data-string-num='5' data-string-name='A'></div>\
                   <div class='string' data-string-num='6' data-string-name='E'></div>\
+                  <div class='legend'></div>\
                 </div>";
 
 function tonify(scale) {
@@ -107,40 +108,34 @@ function generateFretboard(scale,key,length) {
     // Extend/shorten the scale to match desired length
     fullString = fullString.concat(fullString).slice(0,length);
     grid[i] = fullString;
-    
 
     console.log(grid[i]);
   }      
 }
 
-$(document).ready(function(){
+function magicTime() {
   
-  // Generate an initial fretboard
-  generateFretboard(major,'G',18);
+  $('.fretboard .string').empty();
+  $('.fretboard .legend').empty();
   
-  // Generate the placeholder Fretboard wrapper
-  $('body').append(wrapper);
-  
-
-});
-
-$(window).on('load', function(){
   // Populate each string
   $('.fretboard .string').each(function(i,string){
     
     $(grid[i+1]).each(function(x,fret){
-      $(string).append("<div class='fret p1 inline-block align-center bg-light-grey' data-note='' data-interval='" + fret + "'>" + fret + "</div>");
+      $(string).append("<div class='fret_wrapper'><div class='fret' data-active='' data-note='' data-interval='" + fret + "'>" + fret + "</div></div>");
     });
     // Identify the open (first) note on each string
-    $(string).find('.fret').first().addClass('open').addClass('bg-medium-grey');
+    $(string).find('.fret_wrapper').first().addClass('open');
     // Make empty cells have no interval, &nbsp;
     $(string).find('.fret').each(function(a,b){
       if ( $(b).data('interval') == "") {
-        $(b).attr('data-interval','nil').html('&nbsp;');
-      } 
+        $(b).attr('data-interval','nil').attr('data-active','false').html('&nbsp;');
+      } else {
+        $(b).attr('data-active','true');
+      }
     });
     
-    // Give each cell it's note
+    // Give each cell its note
     var extendedNotes = notes.concat(notes);
     frontLop = extendedNotes.slice( 0, (12 - stringDiff[i+1]) );
     backLop = extendedNotes.slice( (12 - stringDiff[i+1]), extendedNotes.length );
@@ -150,4 +145,84 @@ $(window).on('load', function(){
     });
 
   });
+  
+    $('.fretboard .legend').append("<div class='fret_marker'></div>");
+    for (var i = 1; i < fretboardLength; i++) {
+      $('.fretboard .legend').append("<div class='fret_marker' data-fret-num='"+(i)+"'>"+i+"</div>");
+    }
+    $('.fret_marker').empty();
+    var showFrets = [1,3,5,7,9,12,15]
+    $(showFrets).each(function(i,obj){
+      $('.fret_marker[data-fret-num='+ obj +']').show().text(obj);  
+    });
+    
+}
+
+$(document).ready(function(){
+
+  // Generate the placeholder Fretboard wrapper
+  $('.fretboard_wrapper').append(wrapper);
+  
+  // Generate an initial fretboard
+  generateFretboard(major,'E',18);
+
+});
+
+$(window).on('load', function(){
+
+  magicTime();
+
+  $('.scenario_1').click(function(){
+    generateFretboard(major,'G',18);
+    magicTime();
+    return false;
+  });
+  $('.scenario_2').click(function(){
+    generateFretboard(major,'D',18);
+    magicTime();
+    return false;
+  });
+  $('.scenario_3').click(function(){
+    generateFretboard(pentatonic_major,'A',18);
+    magicTime();
+    return false;
+  });
+  $('.scenario_4').click(function(){
+    generateFretboard(pentatonic_minor,'A',18);
+    magicTime();
+    return false;
+  });
+  $('.scenario_5').click(function(){
+    generateFretboard(minor_melodic,'E',18);
+    magicTime();
+    return false;
+  });
+  
+  $('.showNotes').click(function(){
+    var replaceWith;
+    $('.fret[data-active="true"]').each(function(i,obj){
+      replaceWith = $(obj).data('note');
+      $(obj).text(replaceWith);
+    });
+    return false;
+  });
+
+  $('.showIntervals').click(function(){
+    var replaceWith;
+    $('.fret[data-active="true"]').each(function(i,obj){
+      replaceWith = $(obj).data('interval');
+      $(obj).text(replaceWith);
+    });
+    return false;
+  });
+
+  $('.show135').click(function(){
+    $('.fret[data-active="true"]').each(function(i,obj){
+      if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
+        $(this).toggleClass('highlight');
+      }
+    });
+    return false;
+  });
+
 });

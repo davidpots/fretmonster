@@ -1,11 +1,62 @@
-.inline-block { display: inline-block; }
-
-.align-center { text-align: center; }
-
-.p1 { padding: 1rem; }
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
 
 .bg-light-grey { background-color: #eee; }
 
 .bg-medium-grey { background-color: #aaa; }
 
-.fret { width: 3rem; }
+.p2 { padding: 2rem; }
+
+.fretboard_wrapper { display: block; margin: 0 auto;}
+.fretboard { display: inline-block; }
+.string { }
+.string:first-child .fret_wrapper { border-top: 1px solid black; }
+.string:first-child .fret_wrapper:first-child { border-top: none; }
+.fret_wrapper { display: inline-block; text-align: center; border-bottom: 1px solid black; border-left: 1px solid black; width: 3rem; }
+.fret_wrapper:first-child { border-left: none; border-bottom: none; border-top: none; }
+.fret_wrapper.open { }
+.fret { display: block; }
+.fret[data-active="true"] { background: #ddffff; }
+.fret[data-interval="1"] { background: #00ffff; }
+.fret.highlight { background: yellow; }
+
+.fret_marker { display: inline-block; width: 3rem; text-align: center; font-size: small; color: #ccc; }
+
+
+
+
+
+/* From Jxn */
+.m0  { margin: 0; }
+.mb0 { margin-bottom: 0; }
+
+.m1  { margin: 1rem; }
+.mt1 { margin-top: 1rem; }
+.mr1 { margin-right: 1rem; }
+.mb1 { margin-bottom: 1rem; }
+.ml1 { margin-left: 1rem; }
+
+.m2  { margin: 2rem; }
+.mt2 { margin-top: 2rem; }
+.mr2 { margin-right: 2rem; }
+.mb2 { margin-bottom: 2rem; }
+.ml2 { margin-left: 2rem; }
+
+.m3  { margin: 3rem; }
+.mt3 { margin-top: 3rem; }
+.mr3 { margin-right: 3rem; }
+.mb3 { margin-bottom: 3rem; }
+.ml3 { margin-left: 3rem; }
+
+.m4  { margin: 4rem; }
+.mt4 { margin-top: 4rem; }
+.mr4 { margin-right: 4rem; }
+.mb4 { margin-bottom: 4rem; }
+.ml4 { margin-left: 4rem; }
+
+
+
+
+.measure { max-width: 60rem; }
+.wrap { margin-left: auto; margin-right: auto; }
