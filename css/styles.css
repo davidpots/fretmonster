@@ -1,27 +1,72 @@
-.left { float: left; }
-.right { float: right; }
-.clear { clear: both; }
 
-.bg-light-grey { background-color: #eee; }
+.absolute-center {
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: auto;
+  display: table;
+}
 
-.bg-medium-grey { background-color: #aaa; }
+/* Scrollable overflowing tables, via http://www.maxdesign.com.au/2013/03/22/simple-responsive-table/ */
 
-.p2 { padding: 2rem; }
+        /* Makes the table scrollable, if overflows */
+        .table_wrapper {
+        	width: 100%;
+        	overflow-y: auto;
+        	_overflow: auto;
+        	margin: 0 0 1em; 
+          padding: 1em; }
+        
+        /* These next two lines add the scrollbar before you scroll (if overflow is present) */
+        .table_wrapper::-webkit-scrollbar {
+        	-webkit-appearance: none;
+        	width: 14px;
+        	height: 14px; }
 
-.fretboard_wrapper { display: block; margin: 0 auto;}
-.fretboard { display: inline-block; }
-.string { }
-.string:first-child .fret_wrapper { border-top: 1px solid black; }
-.string:first-child .fret_wrapper:first-child { border-top: none; }
-.fret_wrapper { display: inline-block; text-align: center; border-bottom: 1px solid black; border-left: 1px solid black; width: 3rem; }
-.fret_wrapper:first-child { border-left: none; border-bottom: none; border-top: none; }
-.fret_wrapper.open { }
-.fret { display: block; }
-.fret[data-active="true"] { background: #ddffff; }
-.fret[data-interval="1"] { background: #00ffff; }
-.fret.highlight { background: yellow; }
+        .table_wrapper::-webkit-scrollbar-thumb {
+        	border-radius: 8px;
+        	border: 3px solid #fff;
+        	background-color: rgba(0, 0, 0, .3); }
 
-.fret_marker { display: inline-block; width: 3rem; text-align: center; font-size: small; color: #ccc; }
+table {
+  border-collapse: collapse; 
+}
+
+td {
+  padding: 0;
+}
+
+.cell { 
+  height: 1.5em;
+}
+
+.fret--hasNote {
+  width: 3em;
+  border-bottom: 1px solid #aaa;
+}
+
+.fret--open {
+  border-right: 3px double #aaa;
+}
+
+.fret--hasBG {
+  background: #f4f4f4;
+  border-right: 1px solid #aaa;
+}
+
+.fret--trailer {
+  width: 1em;
+  border-bottom: 1px solid #aaa;
+  border-right: none;
+}
+
+.string:first-child .fret {
+  background: none;
+  border-right: none;
+  border-left: none;
+}
+
+
+
+.note { z-index: 1; height: 1.4em; width: 1.4em; background: orange; border-radius: .7em; position: absolute; top: .75em; left: 50%; margin-left: -0.7em; }
 
 
 
@@ -54,8 +99,6 @@
 .mr4 { margin-right: 4rem; }
 .mb4 { margin-bottom: 4rem; }
 .ml4 { margin-left: 4rem; }
-
-
 
 
 .measure { max-width: 60rem; }
