@@ -59,13 +59,13 @@ var grid = {
                  };
 
 var wrapper =  "<div class='fretboard'>\
-                  <div class='string' data-string-num='1' data-string-name='E'></div>\
-                  <div class='string' data-string-num='2' data-string-name='B'></div>\
-                  <div class='string' data-string-num='3' data-string-name='G'></div>\
-                  <div class='string' data-string-num='4' data-string-name='D'></div>\
-                  <div class='string' data-string-num='5' data-string-name='A'></div>\
-                  <div class='string' data-string-num='6' data-string-name='E'></div>\
-                  <div class='legend'></div>\
+                  <div class='row string' data-string-num='1' data-string-name='E'></div>\
+                  <div class='row string' data-string-num='2' data-string-name='B'></div>\
+                  <div class='row string' data-string-num='3' data-string-name='G'></div>\
+                  <div class='row string' data-string-num='4' data-string-name='D'></div>\
+                  <div class='row string' data-string-num='5' data-string-name='A'></div>\
+                  <div class='row string' data-string-num='6' data-string-name='E'></div>\
+                  <div class='row legend'></div>\
                 </div>";
 
 function tonify(scale) {
@@ -84,36 +84,44 @@ function tonify(scale) {
   return scale;
 }
 
-function generateFretboard(scale,key,length) {
-  fretboardLength = length;
+function rearrange(toSplit,divider) {
+  // Splits an array, shifts rear portion (after "divider") to the front
+  var backLop = [],
+      frontLop = [],
+      combined = [];
+  backLop  = toSplit.slice( divider, toSplit.length);
+  frontLop = toSplit.slice( 0, divider);
+  combined = backLop.concat(frontLop);
+  return combined;
+}
+
+function computeScaleTones(scale,key,length) {
 
   // Accepts (1) a scale, (2) a desired key, and (3) the desired length of the fretboard
-  //
-  // Example:   generateFreboard(major,'G',18)
-  // Returns:   ["6", "-", "7", "1", "-", "2", "-", "3", "4", "-", "5", "-", "6", "-", "7", "1", "-", "2"]
-  //
-  // The first item in the returned array is understood to be the 0th fret (i.e., open) on the string.
 
-  // Setup the initial 12-fret scale per that key
-  var scaleSplit = tonify(scale);
-  var backLop  = scaleSplit.slice( (scaleSplit.length - keyDiff[key]) , scaleSplit.length);
-  var frontLop = scaleSplit.slice( 0, (scaleSplit.length - keyDiff[key]));
-  var combined = backLop.concat(frontLop);
+  // Put the fretboard length into the global variable
+  fretboardLength = length;
+  
+  // Convert the scale's "o" and "-" into the tones per that scale.
+  // Example: "o-o-oo-o-o-o" becomes ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"]
+  scale = tonify(scale);
+  
+  // Convert the tones in tonified scale to be as they'd appear on the E string, starting at fret 0
+  // For example, a major scale in the key of G would be converted
+  // from ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"] to ["6", "", "7", "1", "", "2", "", "3", "4", "", "5", ""]
+  scale = rearrange( scale, (12 - keyDiff[key]) );
   
   // Populate each string with the scale, adjusted for variable string tone
   for (var i = 1; i <= 6; i++) {
-    frontLop = combined.slice( 0, (12 - stringDiff[i]) );
-    backLop = combined.slice( (12 - stringDiff[i]), combined.length );
-    var fullString = backLop.concat(frontLop);
+    var fullString = rearrange(scale, (12 - stringDiff[i]) );
     // Extend/shorten the scale to match desired length
-    fullString = fullString.concat(fullString).slice(0,length);
-    grid[i] = fullString;
-
+    grid[i] = fullString.concat(fullString).slice(0,length);
     console.log(grid[i]);
-  }      
+  }
+  
 }
 
-function magicTime() {
+function addTonesToFretboard() {
   
   $('.fretboard .string').empty();
   $('.fretboard .legend').empty();
@@ -136,10 +144,8 @@ function magicTime() {
     });
     
     // Give each cell its note
-    var extendedNotes = notes.concat(notes);
-    frontLop = extendedNotes.slice( 0, (12 - stringDiff[i+1]) );
-    backLop = extendedNotes.slice( (12 - stringDiff[i+1]), extendedNotes.length );
-    extendedNotes = backLop.concat(frontLop);
+    var extendedNotes = notes.concat(notes);    
+    extendedNotes = rearrange(extendedNotes,(12 - stringDiff[i+1]));
     $(string).find('.fret').each(function(a,b){
       $(b).attr('data-note', extendedNotes[a]);
     });
@@ -151,7 +157,7 @@ function magicTime() {
       $('.fretboard .legend').append("<div class='fret_marker' data-fret-num='"+(i)+"'>"+i+"</div>");
     }
     $('.fret_marker').empty();
-    var showFrets = [1,3,5,7,9,12,15]
+    var showFrets = [1,3,5,7,9,12,15];
     $(showFrets).each(function(i,obj){
       $('.fret_marker[data-fret-num='+ obj +']').show().text(obj);  
     });
@@ -164,37 +170,37 @@ $(document).ready(function(){
   $('.fretboard_wrapper').append(wrapper);
   
   // Generate an initial fretboard
-  generateFretboard(major,'E',18);
+  computeScaleTones(major,'E',18);
 
 });
 
 $(window).on('load', function(){
 
-  magicTime();
+  addTonesToFretboard();
 
   $('.scenario_1').click(function(){
-    generateFretboard(major,'G',18);
-    magicTime();
+    computeScaleTones(major,'G',18);
+    addTonesToFretboard();
     return false;
   });
   $('.scenario_2').click(function(){
-    generateFretboard(major,'D',18);
-    magicTime();
+    computeScaleTones(major,'D',18);
+    addTonesToFretboard();
     return false;
   });
   $('.scenario_3').click(function(){
-    generateFretboard(pentatonic_major,'A',18);
-    magicTime();
+    computeScaleTones(pentatonic_major,'A',18);
+    addTonesToFretboard();
     return false;
   });
   $('.scenario_4').click(function(){
-    generateFretboard(pentatonic_minor,'A',18);
-    magicTime();
+    computeScaleTones(pentatonic_minor,'A',18);
+    addTonesToFretboard();
     return false;
   });
   $('.scenario_5').click(function(){
-    generateFretboard(minor_melodic,'E',18);
-    magicTime();
+    computeScaleTones(minor_melodic,'E',18);
+    addTonesToFretboard();
     return false;
   });
   
