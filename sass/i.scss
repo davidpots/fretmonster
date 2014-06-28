@@ -1,9 +1,11 @@
+// From BASSCSS
+@import "reset";
+@import "colors";
+@import "spacing";
+@import "type";
+@import "positions";
 
-.absolute-center {
-  top: 0; right: 0; bottom: 0; left: 0;
-  margin: auto;
-  display: table;
-}
+// Fretboard
 
 /* Scrollable overflowing tables, via http://www.maxdesign.com.au/2013/03/22/simple-responsive-table/ */
 
@@ -83,10 +85,3 @@ td {
   color: #fff;
 
 }
-
-
-
-
-
-.measure { max-width: 60rem; }
-.wrap { margin-left: auto; margin-right: auto; }
