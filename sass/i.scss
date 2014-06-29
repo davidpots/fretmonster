@@ -1,4 +1,5 @@
 // From BASSCSS
+@import "variables";
 @import "reset";
 @import "colors";
 @import "spacing";
@@ -10,55 +11,73 @@
 /* Scrollable overflowing tables, via http://www.maxdesign.com.au/2013/03/22/simple-responsive-table/ */
 
         /* Makes the table scrollable, if overflows */
-        .table_wrapper {
-        	width: 100%;
-        	overflow-y: auto;
-        	_overflow: auto;
-        	margin: 0 0 1em; 
-          padding: 1em; }
-        
-        /* These next two lines add the scrollbar before you scroll (if overflow is present) */
-        .table_wrapper::-webkit-scrollbar {
-        	-webkit-appearance: none;
-        	width: 14px;
-        	height: 14px; }
-
-        .table_wrapper::-webkit-scrollbar-thumb {
-        	border-radius: 8px;
-        	border: 3px solid #fff;
-        	background-color: rgba(0, 0, 0, .3); }
+        // .table_wrapper {
+        // 	width: 100%;
+        // 	overflow-y: auto;
+        // 	_overflow: auto;
+        // 	margin: 0 0 1em; 
+        //   padding: 1em; }
+        // 
+        // /* These next two lines add the scrollbar before you scroll (if overflow is present) */
+        // .table_wrapper::-webkit-scrollbar {
+        // 	-webkit-appearance: none;
+        // 	width: 14px;
+        // 	height: 14px; }
+        // 
+        // .table_wrapper::-webkit-scrollbar-thumb {
+        // 	border-radius: 8px;
+        // 	border: 3px solid #fff;
+        // 	background-color: rgba(0, 0, 0, .3); }
 
 table {
-  border-collapse: collapse; 
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 td {
   padding: 0;
 }
 
+$cellWidth: $unit * 4.74;
+$cellHeight: $unit * 2.74;
+$dotSize: 2rem;
+$stringWidth: 3px;
+
+table.string_labels {
+  float: left;
+  .cell {
+    height: $cellHeight;
+    width: $cellWidth / 2;
+    margin-bottom: $stringWidth;
+    line-height: $cellHeight;
+    top: $cellHeight / 2;
+    color: #777;
+    font-size: .9rem;
+  }
+}
+
 .cell { 
-  height: 1.5em;
+  width: $cellWidth;
+  height: $cellHeight;
 }
 
 .string { 
-  border-bottom: 1px solid #aaa; 
+  border-bottom: $stringWidth solid #aaa; 
 }
 
-.fret--hasNote {
-  width: 3em;
-}
+.fret--hasNote {}
 
 .fret--open {
   border-right: 4px solid #aaa;
 }
 
 .fret--hasBG {
-  background: #f4f4f4;
-  border-right: 1px solid #aaa;
+  background: #f3f3f3;
+  border-right: 1px solid #ccc;
 }
 
 .fret--trailer {
-  width: 1em;
+  width: $unit * 1;
   border-right: none;
 }
 
@@ -71,17 +90,18 @@ td {
 
 
 .note { 
-  z-index: 1;
-  height: 1.5em;
-  width: 1.5em;
-  background: orange;
-  border-radius: .75em;
-  position: absolute;
-  top: .75em;
+  height: $dotSize;
+  width: $dotSize;
+  border-radius: $dotSize / 2;
+  top: $cellHeight / 2;
+  line-height: $dotSize;
+  margin-top: ($cellHeight - $dotSize) / 2; // Difference between the cell height + dot height, halved
+  margin-left: $dotSize / -2; // shift it backwards half of the element's width
   left: 50%;
-  margin-left: -0.75em; 
+  background: orange;
+  position: absolute;
   text-align: center;
   font-weight: bold;
   color: #fff;
-
+  z-index: 1;
 }

@@ -1,7 +1,6 @@
 // Type
 
-$font-default: 'Helvetica Neue', Helvetica, sans-serif;
-$font-fancy: 'Fjord One', Fjord, Georgia, Serif;
+$font-default: 'Open Sans','Helvetica Neue', Helvetica, sans-serif;
 $font-monospace: 'Droid Sans Mono', monospace;
 
 body {
@@ -56,12 +55,6 @@ code {
   background: rgba(0,0,0,0.0325);
 }
 
-// Fancy Headings
-
-.fancy {
-  font-family: $font-fancy;
-  font-weight: 400;
-}
 
 // Utilities
 
