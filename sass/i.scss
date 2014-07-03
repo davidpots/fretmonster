@@ -81,6 +81,13 @@ table.string_labels {
   border-right: none;
 }
 
+.fret--fretNum {
+  text-align: center;
+  line-height: $cellHeight * 1.8;
+  color: #aaa;
+  font-size: .9rem;
+}
+
 .string:first-child .fret {
   background: none;
   border-right-color: transparent;
@@ -105,3 +112,9 @@ table.string_labels {
   color: #fff;
   z-index: 1;
 }
+
+.note.highlight {
+  background: black;
+}
+
+.scenario.active { background: yellow; }

@@ -5,7 +5,7 @@ var major             = 'o-o-oo-o-o-o',
     pentatonic_major  = 'o-o-o--o-o--',
     pentatonic_minor  = 'o--o-o-o--o-';
 
-var fretboardLength;
+var fretboardLength = 18;
 var grid = {
               1 : '',
               2 : '',
@@ -58,15 +58,26 @@ var grid = {
                     6 : 0   // E string (low)
                  };
 
-var wrapper =  "<div class='fretboard'>\
-                  <div class='row string' data-string-num='1' data-string-name='E'></div>\
-                  <div class='row string' data-string-num='2' data-string-name='B'></div>\
-                  <div class='row string' data-string-num='3' data-string-name='G'></div>\
-                  <div class='row string' data-string-num='4' data-string-name='D'></div>\
-                  <div class='row string' data-string-num='5' data-string-name='A'></div>\
-                  <div class='row string' data-string-num='6' data-string-name='E'></div>\
-                  <div class='row legend'></div>\
-                </div>";
+
+  var fretboardHTML =  '<div class="table_wrapper">\
+                          <table class="string_labels">\
+                            <tr><td><div class="cell">E</div></td></tr>\
+                            <tr><td><div class="cell">B</div></td></tr>\
+                            <tr><td><div class="cell">G</div></td></tr>\
+                            <tr><td><div class="cell">D</div></td></tr>\
+                            <tr><td><div class="cell">A</div></td></tr>\
+                            <tr><td><div class="cell">E</div></td></tr>\
+                          </table>\
+                          <table class="fretboard">\
+                            <tr class="string"></tr>\
+                            <tr class="string"></tr>\
+                            <tr class="string"></tr>\
+                            <tr class="string"></tr>\
+                            <tr class="string"></tr>\
+                            <tr class="string"></tr>\
+                            <tr class="legend"></tr>\
+                          </table>\
+                        </div>';
 
 function tonify(scale) {
   // Convert scale string to an array
@@ -123,61 +134,96 @@ function computeScaleTones(scale,key,length) {
 
 function addTonesToFretboard() {
   
-  $('.fretboard .string').empty();
-  $('.fretboard .legend').empty();
+  $('.fretboard .note').remove();
   
+  noteHTML = '<div class="note"></div>';
+
   // Populate each string
-  $('.fretboard .string').each(function(i,string){
+  $('.fretboard .string').each(function(stringNum,stringObj){
     
-    $(grid[i+1]).each(function(x,fret){
-      $(string).append("<div class='fret_wrapper'><div class='fret' data-active='' data-note='' data-interval='" + fret + "'>" + fret + "</div></div>");
-    });
-    // Identify the open (first) note on each string
-    $(string).find('.fret_wrapper').first().addClass('open');
-    // Make empty cells have no interval, &nbsp;
-    $(string).find('.fret').each(function(a,b){
-      if ( $(b).data('interval') == "") {
-        $(b).attr('data-interval','nil').attr('data-active','false').html('&nbsp;');
-      } else {
-        $(b).attr('data-active','true');
+    $(grid[stringNum+1]).each(function(gridNum,gridObj){
+      if ( gridObj != "" ) {
+        $(stringObj).find('.fret').eq(gridNum).html(noteHTML);
+        $(stringObj).find('.fret').eq(gridNum).find('.note').attr('data-active',true).attr('data-interval',gridObj).text(gridObj);
       }
-    });
+    });    
     
     // Give each cell its note
     var extendedNotes = notes.concat(notes);    
-    extendedNotes = rearrange(extendedNotes,(12 - stringDiff[i+1]));
-    $(string).find('.fret').each(function(a,b){
-      $(b).attr('data-note', extendedNotes[a]);
+    extendedNotes = rearrange(extendedNotes,(12 - stringDiff[stringNum+1]));
+    $(stringObj).find('.fret').each(function(fretNum,fretObj){
+      $(fretObj).find('.note').attr('data-note', extendedNotes[fretNum]);
     });
 
   });
-  
-    $('.fretboard .legend').append("<div class='fret_marker'></div>");
-    for (var i = 1; i < fretboardLength; i++) {
-      $('.fretboard .legend').append("<div class='fret_marker' data-fret-num='"+(i)+"'>"+i+"</div>");
-    }
-    $('.fret_marker').empty();
-    var showFrets = [1,3,5,7,9,12,15];
-    $(showFrets).each(function(i,obj){
-      $('.fret_marker[data-fret-num='+ obj +']').show().text(obj);  
-    });
+
     
+}
+
+function generateFretboard() {
+  
+  $('.fretboard_wrapper').append(fretboardHTML);
+  $('.fretboard .string').each(function(i,string){
+    cellHTML = '<td><div class="cell fret"></div></td>';
+    for (var i = 0; i <= fretboardLength; i++) {
+      $(string).append(cellHTML);  
+    }
+    $(string).find('.cell').each(function(cellNum,cellObj){
+      if ( cellNum == 0 ) {
+        $(cellObj).addClass('fret--open');
+      } else {
+        $(cellObj).addClass('fret--hasBG');
+      }
+      if ( cellNum == fretboardLength) {
+        $(cellObj).addClass('fret--trailer');
+      }
+    });      
+  });
+
+  for (var i = 1; i < fretboardLength; i++) {
+    $('.fretboard .legend').append(cellHTML);
+  }
+  $('.fretboard .legend').find('.fret').each(function(fretNum,fretObj){
+    $(fretObj).hide();
+    $(fretObj).addClass('fret--fretNum').attr('data-fret-num',fretNum).text(fretNum);
+  });
+  $('.fret_marker').empty();
+  var showFrets = [1,3,5,7,9,12,15];
+  $(showFrets).each(function(i,obj){
+    $('.fret--fretNum[data-fret-num='+ obj +']').show();  
+  });
 }
 
 $(document).ready(function(){
 
   // Generate the placeholder Fretboard wrapper
-  $('.fretboard_wrapper').append(wrapper);
+    
+  generateFretboard();
   
   // Generate an initial fretboard
   computeScaleTones(major,'E',18);
+  addTonesToFretboard();
 
 });
 
+
+
+
+
+
+
+
+
+
 $(window).on('load', function(){
 
-  addTonesToFretboard();
+  // addTonesToFretboard();
 
+  $('.scenario_0').click(function(){
+    computeScaleTones(major,'E',18);
+    addTonesToFretboard();
+    return false;
+  });
   $('.scenario_1').click(function(){
     computeScaleTones(major,'G',18);
     addTonesToFretboard();
@@ -206,7 +252,7 @@ $(window).on('load', function(){
   
   $('.showNotes').click(function(){
     var replaceWith;
-    $('.fret[data-active="true"]').each(function(i,obj){
+    $('.note[data-active="true"]').each(function(i,obj){
       replaceWith = $(obj).data('note');
       $(obj).text(replaceWith);
     });
@@ -215,7 +261,7 @@ $(window).on('load', function(){
 
   $('.showIntervals').click(function(){
     var replaceWith;
-    $('.fret[data-active="true"]').each(function(i,obj){
+    $('.note[data-active="true"]').each(function(i,obj){
       replaceWith = $(obj).data('interval');
       $(obj).text(replaceWith);
     });
@@ -223,12 +269,17 @@ $(window).on('load', function(){
   });
 
   $('.show135').click(function(){
-    $('.fret[data-active="true"]').each(function(i,obj){
+    $('.note[data-active="true"]').each(function(i,obj){
       if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
         $(this).toggleClass('highlight');
       }
     });
     return false;
   });
+  
+  $('.scenario').click(function(){
+    $('.scenario').removeClass('active');
+    $(this).addClass('active');
+  })
 
 });
