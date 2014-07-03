@@ -98,12 +98,15 @@ function rearrange(toSplit,divider) {
 function generateFretboard() {
   
   // Create & populate the placeholder & empty fretboard HTML
-  
+
+  // Append the empty Fretboard wrapper to the DOM
   $('.fretboard_wrapper').append(fretboardHTML);
 
-  // Apply the fret cells to each string
+  // Prime the HTML that each fret/cell will be filled with
+  cellHTML = '<td><div class="cell fret"></div></td>';
+
+  // Apply the fret/cell HTML into each string
   $('.fretboard .string').each(function(i,string){
-    cellHTML = '<td><div class="cell fret"></div></td>';
     for (var i = 0; i <= fretboardLength; i++) {
       $(string).append(cellHTML);  
     }
