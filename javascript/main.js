@@ -79,24 +79,12 @@ var grid = {
                           </table>\
                         </div>';
 
-function tonify(scale) {
-  // Convert scale string to an array
-  scale = scale.split('');
-  // Iterate through each tone
-  var tone;
-  $(scale).each(function(i,obj) {
-    tone = i+1;
-    if (obj == 'o') {
-      scale[i] = toneMap[tone];
-    } else {
-      scale[i] = '';
-    }
-  });
-  return scale;
-}
 
 function rearrange(toSplit,divider) {
+  
   // Splits an array, shifts rear portion (after "divider") to the front
+  // Universal function, used throughout the app.
+  
   var backLop = [],
       frontLop = [],
       combined = [];
@@ -106,63 +94,14 @@ function rearrange(toSplit,divider) {
   return combined;
 }
 
-function computeScaleTones(scale,key,length) {
-
-  // Accepts (1) a scale, (2) a desired key, and (3) the desired length of the fretboard
-
-  // Put the fretboard length into the global variable
-  fretboardLength = length;
-  
-  // Convert the scale's "o" and "-" into the tones per that scale.
-  // Example: "o-o-oo-o-o-o" becomes ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"]
-  scale = tonify(scale);
-  
-  // Convert the tones in tonified scale to be as they'd appear on the E string, starting at fret 0
-  // For example, a major scale in the key of G would be converted
-  // from ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"] to ["6", "", "7", "1", "", "2", "", "3", "4", "", "5", ""]
-  scale = rearrange( scale, (12 - keyDiff[key]) );
-  
-  // Populate each string with the scale, adjusted for variable string tone
-  for (var i = 1; i <= 6; i++) {
-    var fullString = rearrange(scale, (12 - stringDiff[i]) );
-    // Extend/shorten the scale to match desired length
-    grid[i] = fullString.concat(fullString).slice(0,length);
-    console.log(grid[i]);
-  }
-  
-}
-
-function addTonesToFretboard() {
-  
-  $('.fretboard .note').remove();
-  
-  noteHTML = '<div class="note"></div>';
-
-  // Populate each string
-  $('.fretboard .string').each(function(stringNum,stringObj){
-    
-    $(grid[stringNum+1]).each(function(gridNum,gridObj){
-      if ( gridObj != "" ) {
-        $(stringObj).find('.fret').eq(gridNum).html(noteHTML);
-        $(stringObj).find('.fret').eq(gridNum).find('.note').attr('data-active',true).attr('data-interval',gridObj).text(gridObj);
-      }
-    });    
-    
-    // Give each cell its note
-    var extendedNotes = notes.concat(notes);    
-    extendedNotes = rearrange(extendedNotes,(12 - stringDiff[stringNum+1]));
-    $(stringObj).find('.fret').each(function(fretNum,fretObj){
-      $(fretObj).find('.note').attr('data-note', extendedNotes[fretNum]);
-    });
-
-  });
-
-    
-}
 
 function generateFretboard() {
   
+  // Create & populate the placeholder & empty fretboard HTML
+  
   $('.fretboard_wrapper').append(fretboardHTML);
+
+  // Apply the fret cells to each string
   $('.fretboard .string').each(function(i,string){
     cellHTML = '<td><div class="cell fret"></div></td>';
     for (var i = 0; i <= fretboardLength; i++) {
@@ -180,6 +119,7 @@ function generateFretboard() {
     });      
   });
 
+  // Apply the fret number row beneath all strings
   for (var i = 1; i < fretboardLength; i++) {
     $('.fretboard .legend').append(cellHTML);
   }
@@ -192,94 +132,165 @@ function generateFretboard() {
   $(showFrets).each(function(i,obj){
     $('.fret--fretNum[data-fret-num='+ obj +']').show();  
   });
+
+}
+
+
+function tonify(scale) {
+  
+  // Convert the scale's "o" and "-" blips into the intervals per that scale.
+  // Example: "o-o-oo-o-o-o" becomes ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"]
+  
+  // Convert scale string to an array
+  scale = scale.split('');
+  // Iterate through each tone
+  var tone;
+  $(scale).each(function(i,obj) {
+    tone = i+1;
+    if (obj == 'o') {
+      scale[i] = toneMap[tone];
+    } else {
+      scale[i] = '';
+    }
+  });
+  return scale;
+}
+
+
+function computeScaleTones(scale,key,length) {
+
+  // Accepts (1) a scale, (2) a desired key, and (3) the desired length of the fretboard
+
+  scaleName = scale;
+
+  // Convert the scale's blip pattern into key-agnostic intervals
+  scale = tonify(scale);
+  
+  // Convert the tones in tonified scale to be as they'd appear on the E string, starting at fret 0
+  // For example, a major scale in the key of G would be converted
+  // from ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"] to ["6", "", "7", "1", "", "2", "", "3", "4", "", "5", ""]
+  scale = rearrange( scale, (12 - keyDiff[key]) );
+  
+  // Populate each string with the scale, adjusted for variable string tone
+  for (var i = 1; i <= 6; i++) {
+    var fullString = rearrange(scale, (12 - stringDiff[i]) );
+    // Extend/shorten the scale to match desired length
+    grid[i] = fullString.concat(fullString).slice(0,length);
+    console.log(grid[i]);
+  }
+  console.log("A " + scaleName + " scale in the key of " + key + " has been saved to the variable 'grid'.");
+}
+
+
+
+function addTonesToFretboard() {
+  
+  // Remoe any existing notes, in case user is generating a new scale
+  $('.fretboard .note').remove();
+  
+  // Set the core HTML that each tone/interval gets
+  noteHTML = '<div class="note"></div>';
+  
+  // Go through each string, add the tones/intervals where appropriate
+  $('.fretboard .string').each(function(stringNum,stringObj){
+
+    // For each note in the scale, give that fret cell the 'note' HTML (i.e., dot)
+    $(grid[stringNum+1]).each(function(gridNum,gridObj){
+      if ( gridObj != "" ) {
+        $(stringObj).find('.fret').eq(gridNum).html(noteHTML);
+        $(stringObj).find('.fret').eq(gridNum).find('.note').attr('data-active',true).attr('data-interval',gridObj).text(gridObj);
+      }
+    });    
+
+    // Give each cell its musical note (i.e., "F#")
+    var extendedNotes = notes.concat(notes);    
+    extendedNotes = rearrange(extendedNotes,(12 - stringDiff[stringNum+1]));
+    $(stringObj).find('.fret').each(function(fretNum,fretObj){
+      $(fretObj).find('.note').attr('data-note', extendedNotes[fretNum]);
+    });
+
+  });    
 }
 
 $(document).ready(function(){
 
   // Generate the placeholder Fretboard wrapper
-    
   generateFretboard();
   
-  // Generate an initial fretboard
+  // Give the user a pre-canned scale to start with.
   computeScaleTones(major,'E',18);
   addTonesToFretboard();
 
 });
 
 
-
-
-
-
-
-
-
-
 $(window).on('load', function(){
 
-  // addTonesToFretboard();
+  // Lets the user switch between pre-canned scale choices. To be replaced with more open-ended UI.
 
-  $('.scenario_0').click(function(){
-    computeScaleTones(major,'E',18);
-    addTonesToFretboard();
-    return false;
-  });
-  $('.scenario_1').click(function(){
-    computeScaleTones(major,'G',18);
-    addTonesToFretboard();
-    return false;
-  });
-  $('.scenario_2').click(function(){
-    computeScaleTones(major,'D',18);
-    addTonesToFretboard();
-    return false;
-  });
-  $('.scenario_3').click(function(){
-    computeScaleTones(pentatonic_major,'A',18);
-    addTonesToFretboard();
-    return false;
-  });
-  $('.scenario_4').click(function(){
-    computeScaleTones(pentatonic_minor,'A',18);
-    addTonesToFretboard();
-    return false;
-  });
-  $('.scenario_5').click(function(){
-    computeScaleTones(minor_melodic,'E',18);
-    addTonesToFretboard();
-    return false;
-  });
+          $('.scenario_0').click(function(){
+            computeScaleTones(major,'E',18);
+            addTonesToFretboard();
+            return false;
+          });
+          $('.scenario_1').click(function(){
+            computeScaleTones(major,'G',18);
+            addTonesToFretboard();
+            return false;
+          });
+          $('.scenario_2').click(function(){
+            computeScaleTones(major,'D',18);
+            addTonesToFretboard();
+            return false;
+          });
+          $('.scenario_3').click(function(){
+            computeScaleTones(pentatonic_major,'A',18);
+            addTonesToFretboard();
+            return false;
+          });
+          $('.scenario_4').click(function(){
+            computeScaleTones(pentatonic_minor,'A',18);
+            addTonesToFretboard();
+            return false;
+          });
+          $('.scenario_5').click(function(){
+            computeScaleTones(minor_melodic,'E',18);
+            addTonesToFretboard();
+            return false;
+          });
+          
+          $('.scenario').click(function(){
+            $('.scenario').removeClass('active');
+            $(this).addClass('active');
+          })
   
-  $('.showNotes').click(function(){
-    var replaceWith;
-    $('.note[data-active="true"]').each(function(i,obj){
-      replaceWith = $(obj).data('note');
-      $(obj).text(replaceWith);
-    });
-    return false;
-  });
-
-  $('.showIntervals').click(function(){
-    var replaceWith;
-    $('.note[data-active="true"]').each(function(i,obj){
-      replaceWith = $(obj).data('interval');
-      $(obj).text(replaceWith);
-    });
-    return false;
-  });
-
-  $('.show135').click(function(){
-    $('.note[data-active="true"]').each(function(i,obj){
-      if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
-        $(this).toggleClass('highlight');
-      }
-    });
-    return false;
-  });
+  // Lets the user tweak or toggle some misc display options
   
-  $('.scenario').click(function(){
-    $('.scenario').removeClass('active');
-    $(this).addClass('active');
-  })
+          $('.showNotes').click(function(){
+            var replaceWith;
+            $('.note[data-active="true"]').each(function(i,obj){
+              replaceWith = $(obj).data('note');
+              $(obj).text(replaceWith);
+            });
+            return false;
+          });
 
+          $('.showIntervals').click(function(){
+            var replaceWith;
+            $('.note[data-active="true"]').each(function(i,obj){
+              replaceWith = $(obj).data('interval');
+              $(obj).text(replaceWith);
+            });
+            return false;
+          });
+
+          $('.show135').click(function(){
+            $('.note[data-active="true"]').each(function(i,obj){
+              if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
+                $(this).toggleClass('highlight');
+              }
+            });
+            return false;
+          });
+          
 });
