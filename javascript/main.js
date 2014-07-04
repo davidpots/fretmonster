@@ -1,9 +1,28 @@
-var major             = 'o-o-oo-o-o-o',
-    minor_melodic     = 'o-oo-o-o-o-o',
-    minor_harmonic    = 'o-oo-o-oo--o',
-    minor_natural     = 'o-oo-o-oo-o-',
-    pentatonic_major  = 'o-o-o--o-o--',
-    pentatonic_minor  = 'o--o-o-o--o-';
+var scales = {  'major'             : { 'name'    : 'major',
+                                        'pattern' : 'o-o-oo-o-o-o' },
+                'minor_melodic'     : { 'name'    : 'melodic minor',
+                                        'pattern' : 'o-oo-o-o-o-o' },
+                'minor_harmonic'    : { 'name'    : 'harmonic minor',
+                                        'pattern' : 'o-oo-o-oo--o' },
+                'minor_natural'     : { 'name'    : 'natural minor',
+                                        'pattern' : 'o-oo-o-oo-o-' },
+                'pentatonic_major'  : { 'name'    : 'pentatonic major',
+                                        'pattern' : 'o-o-o--o-o--' },
+                'pentatonic_minor'  : { 'name'    : 'pentatonic minor',
+                                        'pattern' : 'o--o-o-o--o-' }
+              };
+
+// var scales = { 'major'            : 'o-o-oo-o-o-o',
+//                'minor_melodic'    : 'o-oo-o-o-o-o',
+//                'minor_harmonic'   : 'o-oo-o-oo--o',
+//                'minor_natural'    : 'o-oo-o-oo-o-',
+//                'pentatonic_major' : 'o-o-o--o-o--',
+//                'pentatonic_minor' : 'o--o-o-o--o-' };
+
+var defaultKey = "E",
+    defaultScale = scales['major'],
+    currentScale = defaultScale,
+    currentKey = defaultKey;
 
 var fretboardLength = 18;
 var grid = {
@@ -179,9 +198,8 @@ function computeScaleTones(scale,key,length) {
     var fullString = rearrange(scale, (12 - stringDiff[i]) );
     // Extend/shorten the scale to match desired length
     grid[i] = fullString.concat(fullString).slice(0,length);
-    console.log(grid[i]);
   }
-  console.log("A " + scaleName + " scale in the key of " + key + " has been saved to the variable 'grid'.");
+  console.log("A " + currentScale.name + " scale in the key of " + key + " has been saved to the variable 'grid'.");
 }
 
 
@@ -217,11 +235,14 @@ function addTonesToFretboard() {
 
 $(document).ready(function(){
 
+  $('.key_selector a[data-key-name="'+defaultKey+'"]').addClass('active');
+  $('.scale_selector a[data-scale-name="'+defaultScale.name+'"]').addClass('active');
+
   // Generate the placeholder Fretboard wrapper
   generateFretboard();
   
   // Give the user a pre-canned scale to start with.
-  computeScaleTones(major,'E',18);
+  computeScaleTones(defaultScale.pattern,defaultKey,fretboardLength);
   addTonesToFretboard();
 
 });
@@ -229,45 +250,32 @@ $(document).ready(function(){
 
 $(window).on('load', function(){
 
-  // Lets the user switch between pre-canned scale choices. To be replaced with more open-ended UI.
+  // Key Changer!
 
-          $('.scenario_0').click(function(){
-            computeScaleTones(major,'E',18);
-            addTonesToFretboard();
-            return false;
-          });
-          $('.scenario_1').click(function(){
-            computeScaleTones(major,'G',18);
-            addTonesToFretboard();
-            return false;
-          });
-          $('.scenario_2').click(function(){
-            computeScaleTones(major,'D',18);
-            addTonesToFretboard();
-            return false;
-          });
-          $('.scenario_3').click(function(){
-            computeScaleTones(pentatonic_major,'A',18);
-            addTonesToFretboard();
-            return false;
-          });
-          $('.scenario_4').click(function(){
-            computeScaleTones(pentatonic_minor,'A',18);
-            addTonesToFretboard();
-            return false;
-          });
-          $('.scenario_5').click(function(){
-            computeScaleTones(minor_melodic,'E',18);
-            addTonesToFretboard();
-            return false;
-          });
-          
-          $('.scenario').click(function(){
-            $('.scenario').removeClass('active');
+          $('.key_selector a').click(function(){
+            $('.key_selector a').removeClass('active');
             $(this).addClass('active');
+            var newKey = $(this).attr('data-key-name');
+            currentKey = newKey;
+            computeScaleTones(currentScale.pattern,newKey,fretboardLength);
+            addTonesToFretboard();
+            return false;
           })
   
-  // Lets the user tweak or toggle some misc display options
+  // Scale Changer!
+
+          $('.scale_selector a').click(function(){
+            $('.scale_selector a').removeClass('active');
+            $(this).addClass('active');
+            var newScale = $(this).attr('data-scale-name');
+            currentScale = scales[newScale];
+            computeScaleTones(scales[newScale].pattern,currentKey,fretboardLength);
+            addTonesToFretboard();
+            return false;
+          })
+
+  
+  // Lets the user tweak or toggle some misc display options. TO DO: Make these persist if a key/scale changes...
   
           $('.showNotes').click(function(){
             var replaceWith;
