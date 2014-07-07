@@ -12,17 +12,13 @@ var scales = {  'major'             : { 'name'    : 'major',
                                         'pattern' : 'o--o-o-o--o-' }
               };
 
-// var scales = { 'major'            : 'o-o-oo-o-o-o',
-//                'minor_melodic'    : 'o-oo-o-o-o-o',
-//                'minor_harmonic'   : 'o-oo-o-oo--o',
-//                'minor_natural'    : 'o-oo-o-oo-o-',
-//                'pentatonic_major' : 'o-o-o--o-o--',
-//                'pentatonic_minor' : 'o--o-o-o--o-' };
-
 var defaultKey = "E",
     defaultScale = scales['major'],
     currentScale = defaultScale,
     currentKey = defaultKey;
+    showingIntervals = true,
+    showingNotes = false,
+    showingTriads = false;
 
 var fretboardLength = 18;
 var grid = {
@@ -210,28 +206,58 @@ function addTonesToFretboard() {
   $('.fretboard .note').remove();
   
   // Set the core HTML that each tone/interval gets
-  noteHTML = '<div class="note"></div>';
+  var noteHTML = '<div class="note"></div>';
+  
+  var dotHTML;
   
   // Go through each string, add the tones/intervals where appropriate
   $('.fretboard .string').each(function(stringNum,stringObj){
 
-    // For each note in the scale, give that fret cell the 'note' HTML (i.e., dot)
+    // Give each active fret the empty noteHTML...
     $(grid[stringNum+1]).each(function(gridNum,gridObj){
       if ( gridObj != "" ) {
         $(stringObj).find('.fret').eq(gridNum).html(noteHTML);
-        $(stringObj).find('.fret').eq(gridNum).find('.note').attr('data-active',true).attr('data-interval',gridObj).text(gridObj);
       }
-    });    
+    });
 
-    // Give each cell its musical note (i.e., "F#")
+    // Give each active fret the necessary data attributes...
+    $(grid[stringNum+1]).each(function(gridNum,gridObj){
+      if ( gridObj != "" ) {
+        $(stringObj).find('.fret').eq(gridNum).find('.note').attr('data-active',true).attr('data-interval',gridObj);
+      }
+    });
+
+    // Give each active fret its absolute note...
     var extendedNotes = notes.concat(notes);    
     extendedNotes = rearrange(extendedNotes,(12 - stringDiff[stringNum+1]));
     $(stringObj).find('.fret').each(function(fretNum,fretObj){
       $(fretObj).find('.note').attr('data-note', extendedNotes[fretNum]);
     });
 
-  });    
+
+    // Give each active fret the necessary data attributes...
+    $(grid[stringNum+1]).each(function(gridNum,gridObj){
+      if ( gridObj != "" ) {
+
+        if ( showingNotes == true ) {
+          dotHTML = $(stringObj).find('.fret').eq(gridNum).find('.note').attr('data-note');
+        }
+        if ( showingIntervals == true ) {
+          dotHTML = gridObj;
+        } 
+        if ( showingTriads == true ) {
+          var x = $(stringObj).find('.fret').eq(gridNum).find('.note');
+          if ( ($(x).attr('data-interval') == "3") || ($(x).attr('data-interval') == "5") || ($(x).attr('data-interval') == "b3") || ($(x).attr('data-interval') == "1")) {
+            $(x).addClass('highlight');
+          }
+        }
+
+        $(stringObj).find('.fret').eq(gridNum).find('.note').text(dotHTML);
+      }
+    });
+  });
 }
+
 
 $(document).ready(function(){
 
@@ -282,7 +308,11 @@ $(window).on('load', function(){
             $('.note[data-active="true"]').each(function(i,obj){
               replaceWith = $(obj).data('note');
               $(obj).text(replaceWith);
+              showingNotes = true;
+              showingIntervals = false;
             });
+            $('.showIntervals').removeClass('active');
+            $(this).toggleClass('active');
             return false;
           });
 
@@ -292,6 +322,8 @@ $(window).on('load', function(){
               replaceWith = $(obj).data('interval');
               $(obj).text(replaceWith);
             });
+            $('.showNotes').removeClass('active');
+            $(this).toggleClass('active');
             return false;
           });
 
@@ -301,6 +333,12 @@ $(window).on('load', function(){
                 $(this).toggleClass('highlight');
               }
             });
+            if ( showingTriads == true ) {
+              showingTriads = false;
+            } else {
+              showingTriads = true;
+            }
+            $(this).toggleClass('active');
             return false;
           });
           
