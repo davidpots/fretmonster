@@ -18,7 +18,8 @@ var defaultKey = "E",
     currentKey = defaultKey;
     showingIntervals = true,
     showingNotes = false,
-    showingTriads = false;
+    highlightingRoot = true,
+    highlightingTriads = false;
 
 var fretboardLength = 18;
 var grid = {
@@ -245,7 +246,7 @@ function addTonesToFretboard() {
         if ( showingIntervals == true ) {
           dotHTML = gridObj;
         } 
-        if ( showingTriads == true ) {
+        if ( highlightingTriads == true ) {
           var x = $(stringObj).find('.fret').eq(gridNum).find('.note');
           if ( ($(x).attr('data-interval') == "3") || ($(x).attr('data-interval') == "5") || ($(x).attr('data-interval') == "b3") || ($(x).attr('data-interval') == "1")) {
             $(x).addClass('highlight');
