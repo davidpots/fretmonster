@@ -308,9 +308,9 @@ $(window).on('load', function(){
             $('.note[data-active="true"]').each(function(i,obj){
               replaceWith = $(obj).data('note');
               $(obj).text(replaceWith);
-              showingNotes = true;
-              showingIntervals = false;
             });
+            showingNotes = true;
+            showingIntervals = false;
             $('.showIntervals').removeClass('active');
             $(this).toggleClass('active');
             return false;
@@ -322,24 +322,56 @@ $(window).on('load', function(){
               replaceWith = $(obj).data('interval');
               $(obj).text(replaceWith);
             });
+            showingNotes = false;
+            showingIntervals = true;
             $('.showNotes').removeClass('active');
             $(this).toggleClass('active');
             return false;
           });
 
-          $('.show135').click(function(){
+          $('.highlightRoot').click(function(){
             $('.note[data-active="true"]').each(function(i,obj){
-              if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
-                $(this).toggleClass('highlight');
+              if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") ) {
+                $(this).removeClass('highlight');
+              }
+              if ( $(obj).attr('data-interval') == "1" ) {
+                $(this).addClass('highlight');
               }
             });
-            if ( showingTriads == true ) {
-              showingTriads = false;
-            } else {
-              showingTriads = true;
-            }
-            $(this).toggleClass('active');
+            highlightingRoot = true;
+            highlightingTriads = false;
+            $('.highlightTriads').removeClass('active');
+            $(this).addClass('active');
             return false;
           });
+
+          $('.highlightTriads').click(function(){
+            $('.note[data-active="true"]').each(function(i,obj){
+              if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
+                $(this).addClass('highlight');
+              }
+            });
+            highlightingRoot = false;
+            highlightingTriads = true;
+            $('.highlightRoot').removeClass('active');
+            $(this).addClass('active');
+            return false;
+          });
+          
+          // 
+          // $('.show135').click(function(){
+          //   $('.note[data-active="true"]').each(function(i,obj){
+          //     if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
+          //       $(this).toggleClass('highlight');
+          //     }
+          //   });
+          //   if ( showingTriads == true ) {
+          //     showingTriads = false;
+          //   } else {
+          //     showingTriads = true;
+          //   }
+          //   $(this).toggleClass('active');
+          //   return false;
+          // });
           
 });

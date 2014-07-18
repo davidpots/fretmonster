@@ -1,1 +1,20 @@
 $unit: 0.75rem;
+
+$bodyBG: #1e4749;
+$bodyCopy: #fff;
+$stringColor: #39716e;
+$fretColor: fade-out(#39716e, 0.5);
+$dotColor: $stringColor;
+$noteColor: fade-out(#01ffb1, 0.5);
+$highlightBG: #01ffb1;
+$fretboardBG: transparent;
+$stringLabelColor: $stringColor;
+$fretNumber: #01ffb1;
+
+
+$cellWidth: $unit * 5;
+$cellHeight: $unit * 3;
+$dotSize: 2rem;
+$stringWidth: 3px;
+
+$linkColor: #01ffb1;
