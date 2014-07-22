@@ -1,20 +1,115 @@
 $unit: 0.75rem;
 
-$bodyBG: #1e4749;
-$bodyCopy: #fff;
-$stringColor: #39716e;
+
+// Colors
+
+$bodyBG: #fff;
+$bodyCopy: #666;
+$stringColor: #ccc;
 $fretColor: fade-out(#39716e, 0.5);
 $dotColor: $stringColor;
-$noteColor: fade-out(#01ffb1, 0.5);
-$highlightBG: #01ffb1;
+$noteColor: black;
+$highlightBG: orange;
 $fretboardBG: transparent;
 $stringLabelColor: $stringColor;
-$fretNumber: #01ffb1;
+$fretNumber: black;
 
+$white: #fff;
+$gray-lightest: #f3f3f3;
+$gray-lighter: #eee;
+$gray-light: #888;
+$gray-reg: #666;
+$gray-dark: #444;
+$black: #222;
+
+$orange: #fc7e10;
+
+// Sizes for fret stuff
 
 $cellWidth: $unit * 5;
 $cellHeight: $unit * 3;
 $dotSize: 2rem;
 $stringWidth: 3px;
 
-$linkColor: #01ffb1;
+$linkColor: blue;
+
+//
+//  Grid, Breakpoints, Spacing
+//  ----------------------------------------------------------------------------
+//
+
+      // 32em = 512px
+      // 48em = 768px
+      // 60em = 960px
+      // 64em = 1024px
+      // 72em = 1152px
+
+      // Default whitespace unit
+      $space: 1rem;
+
+      // Breakpoints
+      $breakpoint-mobile: 32em; // 512px
+      $breakpoint-desktop: 48em; // 768px
+
+      // Grid
+      $grid-max-width: 64rem;
+      $grid-gutter: 1.5 * $space;
+
+
+//
+//  Typefaces Used.
+//  ----------------------------------------------------------------------------
+// 
+//  Used for font-family. See _type.scss for implementation details.
+//
+
+      $font-default: 'Open Sans', Helvetica, sans-serif;
+      $font-monospace: 'Source Code Pro', monospace;
+
+//
+//  Typographic Scale. 
+//  ----------------------------------------------------------------------------
+// 
+//  Used for font-size & line-height. See _type.scss for implementation details.
+//
+
+      $fs-xxxl: 2.5rem;      $lh-xxxl: 3.5rem;     /* h0            48px/56px */
+      $fs-xxl:  2rem;        $lh-xxl:  2.5rem;     /* h1            32px/40px */
+      $fs-xl:   1.625rem;    $lh-xl:   2rem;       /* h2            24px/30px */
+      $fs-l:    1.25rem;     $lh-l:    1.625rem;   /* h3            18px/26px */
+      $fs-m:    1rem;        $lh-m:    1.375rem;   /* p,h5,h6       16px/22px */
+      $fs-s:    .875rem;     $lh-s:    1.25rem;    /* .small        14px/20px */
+      $fs-xs:   .8125rem;    $lh-xs:   1.125rem;   /* .smaller      13px/18px */
+      $fs-xxs:  .75rem;      $lh-xxs:  1rem;       /* .smallest     12px/16px */
+      // Font Weight
+
+      $fw-bold: 600;
+      $fw-normal: 400;
+
+//
+//  Spacing Scale. 
+//  ----------------------------------------------------------------------------
+// 
+//  Used for margin & padding. See _spacing.scss for implementation details.
+//
+
+      $sp-n:     0;
+      $sp-xxs:  .125rem;
+      $sp-xs:   .25rem;
+      $sp-s:    .5rem;
+      $sp-m:     1rem;
+      $sp-l:     2rem;
+      $sp-xl:    4rem;
+      $sp-xxl:   8rem;
+      $sp-xxxl: 16rem;
+
+//
+//  Borders 
+//  ----------------------------------------------------------------------------
+// 
+
+      $border-color: red;
+      $border-width: 1px;
+      $border-radius: .325rem;
+      $border-radius-small: .25rem;
+      

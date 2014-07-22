@@ -1,0 +1,14 @@
+// Base thematic styles
+
+body {
+  color: $bodyCopy;
+  background-color: $white;
+}
+
+a {
+  color: $orange;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

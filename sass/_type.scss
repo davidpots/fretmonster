@@ -1,80 +1,134 @@
-// Type
+// -----------------------------------------------------------------------------
+// Type Scale
+// -----------------------------------------------------------------------------
 
-$font-default: 'Open Sans','Helvetica Neue', Helvetica, sans-serif;
-$font-monospace: 'Droid Sans Mono', monospace;
+      /* See _variables.scss for scale details */
 
-body {
-  font-family: $font-default;
-  font-weight: 400;
-  line-height: 1.5rem;
-}
+      body {
+        font-family: $font-default;
+        font-weight: $fw-normal;
+        line-height: $lh-m;
+        font-size: 100%;
+      }
 
-// Base Type Scale
+      .h0 {
+        font-size: $fs-xxxl;
+        line-height: $lh-xxxl;
+      }
 
-h1, h2, h3 { 
-  margin: 0 0 0.375rem 0;
-}
+      h1, .h1 {
+        font-size: $fs-xxl;
+        line-height: $lh-xxl;
+      }
 
-h1, .h1 {
-  font-size: 2.5rem;
-  line-height: 3.5rem;
-}
+      h2, .h2 {
+        font-size: $fs-xl;
+        line-height: $lh-xl;
+      }
 
-h2, .h2 {
-  font-size: 1.875rem;
-  line-height: 2.5rem;
-}
+      h3, .h3 {
+        font-size: $fs-l;
+        line-height: $lh-l;
+      }
 
-h3, .h3 {
-  font-size: 1.5rem;
-  line-height: 2.0rem;
-}
+      p, .p, dl, ol, ul, h4, .h4, h5, .h5, h6, .h6 {
+        font-size: $fs-m;
+        line-height: $lh-m;
+      }
 
-h4, .h4 {
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-}
+      small, .small {
+        font-size: $fs-s;
+        line-height: $lh-s;
+      }
 
-p, .p, h5, .h5, h6, .h6, dl, ol, ul {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
+      .smaller {
+        font-size: $fs-xs;
+        line-height: $lh-xs;
+      }
+      
+      .smallest {
+        font-size: $fs-xxs;
+        line-height: $lh-xxs;
+      }
 
-h6, .h6, small, .small {
-  font-size: .875rem;
-  line-height: 1.25rem;
-}
+// -----------------------------------------------------------------------------
+// Typographic Styling
+// -----------------------------------------------------------------------------
 
-pre,code { 
-  font-family: $font-monospace;
-  font-size: .75rem;
-}
-code {
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  background: rgba(0,0,0,0.0325);
-}
+      // Typeface Specification & Overrides
+      
+          h1,h2,h3,h4 {
+            font-weight: $fw-bold;
+            margin-top: 1.375rem;
+          }
+          
+          .font-default {
+            font-family: $font-default;
+          }
+          
+          .font-monospace {
+            font-family: $font-monospace;
+          }
 
+      // Bold / Strong
 
-// Utilities
+          h1,h2,h3,h4,h5,h6,strong,.bold,dt,th { 
+            color: darken($bodyCopy, 15%);
+          }
 
-strong, .bold { font-weight: bold; }
-.regular { font-weight: normal; }
-.italic { font-style: italic; }
-.caps { text-transform: uppercase; letter-spacing: .1rem; }
-.center { text-align: center; }
-.right-align  { text-align: right; }
+      // "Weak" text (de-emphasized)
 
-// Typographical Measure
-// Use with the .wrap class to center container
+          .weak {
+            color: lighten($bodyCopy, 25%);
+          }
 
-.measure { max-width: 48rem; }
-.measure-narrow { max-width: 32rem; }
-.measure-wide { max-width: 72rem; }
+      // Monospace & Code Samples
 
-// Leading Tweaks
+          pre, code, samp, .mono {
+            font-family: $font-monospace;
+            font-size: $fs-s;
+            border-radius: $border-radius;
+            background-color: $gray-lightest;
+          }
+          
+          code {
+            padding: 2px 4px;
+          }
+          
+          pre {
+            padding: 1rem;
+            overflow: auto;
+          }
 
-.leading-1 { line-height: 1.5rem; }
-.leading-2 { line-height: 2rem; }
-.leading-3 { line-height: 3rem; }
-.leading-4 { line-height: 4rem; }
+      // Horizontal Rule
+          
+          hr {
+            border: 0;
+            height: 0;
+            border-top: 3px double $gray-lighter;
+            margin-top: 2.75rem;
+            margin-bottom: 2.5rem;
+            width: 60%;
+          }
+
+      // Character Tweaks
+
+          strong, .bold { font-weight: $fw-bold; }
+          .regular { font-weight: $fw-normal; }
+          .italic { font-style: italic; }
+          .caps { text-transform: uppercase; }
+
+      // Alignment Tweaks
+
+          .center { text-align: center; }
+          .align-right  { text-align: right; }
+
+      // Line Height Tweaks
+
+          .lh-xs { line-height: $lh-xs; }
+          .lh-s { line-height: $lh-s; }
+          .lh-m { line-height: $lh-m; }
+          .lh-l { line-height: $lh-l; }
+          .lh-xl { line-height: $lh-xl; }
+          .lh-xxl { line-height: $lh-xxl; }
+          .lh-xxxl { line-height: $lh-xxxl; }

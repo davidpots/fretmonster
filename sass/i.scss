@@ -1,21 +1,11 @@
 // From BASSCSS
 @import "variables";
 @import "reset";
-@import "colors";
 @import "spacing";
 @import "type";
+@import "grid";
 @import "positions";
-
-body {
-  background-color: $bodyBG;
-  color: $bodyCopy;
-}
-
-a {
-  color: $linkColor;
-}
-
-
+@import "theme";
 
 // Waves animation from Jxn
 
@@ -25,24 +15,24 @@ a {
 
 @-webkit-keyframes waves {
   from {
-    box-shadow: 0 0 0 0 darken($bodyBG,3%), 0 0 0 1px rgba(1, 255, 177, 0.5); }
+    box-shadow: 0 0 0 0 darken($bodyBG,3%), 0 0 0 1px rgba(255, 147, 30, 0.5); }
 
   to {
-    box-shadow: 0 0 0 6px darken($bodyBG,3%), 0 0 0 12px rgba(1, 255, 177, 0); } }
+    box-shadow: 0 0 0 6px darken($bodyBG,3%), 0 0 0 12px rgba(255, 147, 30, 0); } }
 
 @keyframes waves {
   from {
-    box-shadow: 0 0 0 0 darken($bodyBG,3%), 0 0 0 1px rgba(1, 255, 177, 0.5); }
+    box-shadow: 0 0 0 0 darken($bodyBG,3%), 0 0 0 1px rgba(255, 147, 30, 0.5); }
 
   to {
-    box-shadow: 0 0 0 6px darken($bodyBG,3%), 0 0 0 12px rgba(1, 255, 177, 0); } }
+    box-shadow: 0 0 0 6px darken($bodyBG,3%), 0 0 0 12px rgba(255, 147, 30, 0); } }
 
 
 
 // Fretboard
 
 .fretboard_backdrop {
-  background: darken($bodyBG,3%);
+  
 }
 
 /* Scrollable overflowing tables, via http://www.maxdesign.com.au/2013/03/22/simple-responsive-table/ */
@@ -51,12 +41,13 @@ a {
          .fretboard_wrapper {
          	width: 100%;
          	overflow-y: auto;
+          position: relative;
          	_overflow: auto;
          	margin: 0 0 1em; 
-          padding: 2.5em 1em 5.5em 1em; }
+          padding: 2.5em 2.5em 5.5em 2.5em; }
            
            // so the main fretboard is on same row as the string labels. Probably hacky but okay for now.
-           .fretboard { position: absolute; left: 30px; }
+           .fretboard { position: absolute; left: 4rem; }
          
          /* These next two lines add the scrollbar before you scroll (if overflow is present) */
           .table_wrapper::-webkit-scrollbar {
@@ -67,7 +58,7 @@ a {
           .table_wrapper::-webkit-scrollbar-thumb {
           	border-radius: 8px;
           	border: 3px solid #fff;
-          	background-color: rgba(0, 0, 0, .3); }
+          	background-color: #eee; }
 
 table {
   border-collapse: collapse;
@@ -96,6 +87,7 @@ table.string_labels {
 .cell { 
   width: $cellWidth;
   height: $cellHeight;
+  position: relative;
 }
 
 

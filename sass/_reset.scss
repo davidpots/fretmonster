@@ -1,17 +1,13 @@
 // Reset
 
 body, button, input, select, textarea, pre { margin: 0; }
-h1, h2, h3, h4, h5, h6, p, dl, ol, ul {
+
+h1,h2,h3,h4,h5,h6,p,ol,ul,dl,table,hr,pre {
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 1.25rem;
 }
+
 button, input, select, textarea { font-family: inherit; font-size: 100%; }
-article, aside, details, figcaption, figure, footer, header, main, nav, section, summary { display: block; }
+article, aside, details, figcaption, figure, footer, header, main, nav, section, summary, img { display: block; }
 
-
-// Added by Pots
-
-*, *:before, *:after {
-  position: relative;
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-}
+img, canvas, iframe, video, svg { max-width: 100%; }
