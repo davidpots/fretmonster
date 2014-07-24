@@ -1,3 +1,37 @@
+$(document).ready(function(){
+  
+  // Sets up size for the overlays
+  $('.js-overlay').css('position', 'fixed')
+  var el = $('.js-overlay');
+  $(el).css('top', 0).css('left', 0).css('right',0).css('bottom',0).height( $(window).height());
+  
+  // On overlay launch, prohibit body from scrolling
+  $('.js-summonOverlay').click(function(){
+    $('body').addClass('oh');
+    return false
+  });
+
+  // On overlay launch, prohibit body from scrolling
+  $('.js-closeOverlay').click(function(){
+    $('body').removeClass('oh');
+    $(this).closest('.js-overlay').hide();
+    return false
+  });
+  
+  // to launch scale picker overlay
+  $('.js-summonScalePicker').click(function(){
+    $('.js-scalePicker').fadeIn('fast');
+    return false;
+  });
+
+  // to launch scale picker overlay
+  $('.js-summonKeyPicker').click(function(){
+    $('.js-keyPicker').fadeIn('fast');
+    return false;
+  });
+
+});
+
 var scales = {  'major'             : { 'name'    : 'major',
                                         'pattern' : 'o-o-oo-o-o-o' },
                 'minor_melodic'     : { 'name'    : 'melodic minor',
@@ -262,8 +296,11 @@ function addTonesToFretboard() {
 
 $(document).ready(function(){
 
-  $('.key_selector a[data-key-name="'+defaultKey+'"]').addClass('active');
-  $('.scale_selector a[data-scale-name="'+defaultScale.name+'"]').addClass('active');
+  $('.js-keySlector a[data-key-name="'+defaultKey+'"]').addClass('active');
+  $('.js-summonKeyPicker').text(defaultKey);
+
+  $('.js-scaleSelector a[data-scale-name="'+defaultScale.name+'"]').addClass('active');
+  $('.js-summonScalePicker').text(defaultScale.name);
 
   // Generate the placeholder Fretboard wrapper
   generateFretboard();
@@ -279,25 +316,37 @@ $(window).on('load', function(){
 
   // Key Changer!
 
-          $('.key_selector a').click(function(){
-            $('.key_selector a').removeClass('active');
+          $('.js-keySelector a').click(function(){
+            $('.js-keySelector a').removeClass('active');
             $(this).addClass('active');
             var newKey = $(this).attr('data-key-name');
             currentKey = newKey;
             computeScaleTones(currentScale.pattern,newKey,fretboardLength);
             addTonesToFretboard();
+
+            // Put into function
+            $('body').removeClass('oh');
+            $('.js-summonKeyPicker').text(newKey);
+            $(this).closest('.js-overlay').hide();
+
             return false;
           })
   
   // Scale Changer!
 
-          $('.scale_selector a').click(function(){
-            $('.scale_selector a').removeClass('active');
+          $('.js-scaleSelector a').click(function(){
+            $('.js-scaleSelector a').removeClass('active');
             $(this).addClass('active');
             var newScale = $(this).attr('data-scale-name');
             currentScale = scales[newScale];
             computeScaleTones(scales[newScale].pattern,currentKey,fretboardLength);
             addTonesToFretboard();
+
+            // Put into function
+            $('body').removeClass('oh');
+
+            $('.js-summonScalePicker').text(scales[newScale].name);
+            $(this).closest('.js-overlay').hide();
             return false;
           })
 

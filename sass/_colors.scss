@@ -1,0 +1,49 @@
+// -----------------------------------------------------------------------------
+// Colors
+// -----------------------------------------------------------------------------
+
+// Site Colors
+        
+        // Color Values
+        $orange: #fc7e10;
+
+        // Color Styles
+        .orange { color: $orange; }
+
+        // Background-Color Styles
+        .bg-orange { background-color: $orange; }
+
+// Black, White, and Grays
+
+        // Color Values
+        $white: #fff;
+        $gray-lighter: #f3f3f3;
+        $gray-light: #eee;
+        $gray: #888;
+        $gray-dark: #666;
+        $gray-darker: #444;
+        $black: #222;
+
+        // Color Styles
+        .white           { color: $white; }
+        .gray-lighter    { color: $gray-lighter; }
+        .gray-light      { color: $gray-light; }
+        .gray            { color: $gray; }
+        .gray-dark       { color: $gray-dark; }
+        .gray-darker     { color: $gray-darker; }
+        .black           { color: $black; }
+
+        // Background-Color Styles
+        .bg-white        { background-color: $white; }
+        .bg-gray-lighter { background-color: $gray-lighter; }
+        .bg-gray-light   { background-color: $gray-light; }
+        .bg-gray         { background-color: $gray; }
+        .bg-gray-dark    { background-color: $gray-dark; }
+        .bg-gray-darker  { background-color: $gray-darker; }
+        .bg-black        { background-color: $black; }
+
+// Map colors to the constants
+
+        $bodyBG: $white;
+        $bodyCopy: $gray-dark;
+        $linkColor: $orange;

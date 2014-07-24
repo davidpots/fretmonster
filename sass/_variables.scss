@@ -1,37 +1,10 @@
-$unit: 0.75rem;
 
 
-// Colors
 
-$bodyBG: #fff;
-$bodyCopy: #666;
-$stringColor: #ccc;
-$fretColor: fade-out(#39716e, 0.5);
-$dotColor: $stringColor;
-$noteColor: black;
-$highlightBG: orange;
-$fretboardBG: transparent;
-$stringLabelColor: $stringColor;
-$fretNumber: black;
 
-$white: #fff;
-$gray-lightest: #f3f3f3;
-$gray-lighter: #eee;
-$gray-light: #888;
-$gray-reg: #666;
-$gray-dark: #444;
-$black: #222;
 
-$orange: #fc7e10;
 
-// Sizes for fret stuff
 
-$cellWidth: $unit * 5;
-$cellHeight: $unit * 3;
-$dotSize: 2rem;
-$stringWidth: 3px;
-
-$linkColor: blue;
 
 //
 //  Grid, Breakpoints, Spacing
@@ -52,7 +25,7 @@ $linkColor: blue;
       $breakpoint-desktop: 48em; // 768px
 
       // Grid
-      $grid-max-width: 64rem;
+      $grid-max-width: 48rem;
       $grid-gutter: 1.5 * $space;
 
 
@@ -73,7 +46,7 @@ $linkColor: blue;
 //  Used for font-size & line-height. See _type.scss for implementation details.
 //
 
-      $fs-xxxl: 2.5rem;      $lh-xxxl: 3.5rem;     /* h0            48px/56px */
+      $fs-xxxl: 5rem;        $lh-xxxl: 6rem;     /* h0                      */
       $fs-xxl:  2rem;        $lh-xxl:  2.5rem;     /* h1            32px/40px */
       $fs-xl:   1.625rem;    $lh-xl:   2rem;       /* h2            24px/30px */
       $fs-l:    1.25rem;     $lh-l:    1.625rem;   /* h3            18px/26px */
@@ -81,9 +54,11 @@ $linkColor: blue;
       $fs-s:    .875rem;     $lh-s:    1.25rem;    /* .small        14px/20px */
       $fs-xs:   .8125rem;    $lh-xs:   1.125rem;   /* .smaller      13px/18px */
       $fs-xxs:  .75rem;      $lh-xxs:  1rem;       /* .smallest     12px/16px */
-      // Font Weight
 
-      $fw-bold: 600;
+      // Font Weight
+      
+      $fw-black: 800;
+      $fw-bold: 700;
       $fw-normal: 400;
 
 //
@@ -108,8 +83,7 @@ $linkColor: blue;
 //  ----------------------------------------------------------------------------
 // 
 
-      $border-color: red;
+      $border-color: $gray-lighter;
       $border-width: 1px;
       $border-radius: .325rem;
-      $border-radius-small: .25rem;
       

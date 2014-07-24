@@ -1,164 +1,22 @@
-// From BASSCSS
-@import "variables";
+// Reset
 @import "reset";
+
+// Setup
+@import "colors";
+@import "variables";
+
+// Core styles
 @import "spacing";
 @import "type";
 @import "grid";
+@import "lists";
 @import "positions";
 @import "theme";
+@import "borders";
+@import "utilities";
 
-// Waves animation from Jxn
+// Custom site components
+@import "fretboard";
 
-.waves {
-  -webkit-animation: waves 1.2s linear infinite;
-  animation: waves 1.2s linear infinite; }
-
-@-webkit-keyframes waves {
-  from {
-    box-shadow: 0 0 0 0 darken($bodyBG,3%), 0 0 0 1px rgba(255, 147, 30, 0.5); }
-
-  to {
-    box-shadow: 0 0 0 6px darken($bodyBG,3%), 0 0 0 12px rgba(255, 147, 30, 0); } }
-
-@keyframes waves {
-  from {
-    box-shadow: 0 0 0 0 darken($bodyBG,3%), 0 0 0 1px rgba(255, 147, 30, 0.5); }
-
-  to {
-    box-shadow: 0 0 0 6px darken($bodyBG,3%), 0 0 0 12px rgba(255, 147, 30, 0); } }
-
-
-
-// Fretboard
-
-.fretboard_backdrop {
-  
-}
-
-/* Scrollable overflowing tables, via http://www.maxdesign.com.au/2013/03/22/simple-responsive-table/ */
-
-        /* Makes the table scrollable, if overflows */
-         .fretboard_wrapper {
-         	width: 100%;
-         	overflow-y: auto;
-          position: relative;
-         	_overflow: auto;
-         	margin: 0 0 1em; 
-          padding: 2.5em 2.5em 5.5em 2.5em; }
-           
-           // so the main fretboard is on same row as the string labels. Probably hacky but okay for now.
-           .fretboard { position: absolute; left: 4rem; }
-         
-         /* These next two lines add the scrollbar before you scroll (if overflow is present) */
-          .table_wrapper::-webkit-scrollbar {
-          	-webkit-appearance: none;
-          	width: 14px;
-          	height: 14px; }
-          
-          .table_wrapper::-webkit-scrollbar-thumb {
-          	border-radius: 8px;
-          	border: 3px solid #fff;
-          	background-color: #eee; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-td {
-  padding: 0;
-}
-
-
-
-table.string_labels {
-  float: left;
-  .cell {
-    height: $cellHeight;
-    width: $cellWidth / 2;
-    margin-bottom: $stringWidth;
-    line-height: $cellHeight;
-    top: $cellHeight / 2;
-    color: $stringLabelColor;
-    font-size: .9rem;
-  }
-}
-
-.cell { 
-  width: $cellWidth;
-  height: $cellHeight;
-  position: relative;
-}
-
-
-
-.string { 
-  border-bottom: $stringWidth solid $stringColor; 
-}
-
-.fret--hasNote {}
-
-.fret--open {
-  border-right: 4px solid $stringColor;
-}
-
-.fret--hasBG {
-  background: $fretboardBG;
-  border-right: 1px solid $fretColor;
-}
-
-.fret--trailer {
-  width: $unit * 1;
-  border-right: none;
-}
-
-.fret--fretNum {
-  text-align: center;
-  line-height: $cellHeight * 1.8;
-  color: $fretNumber;
-  font-size: .9rem;
-}
-
-.string:first-child .fret {
-  background: none;
-  border-right-color: transparent;
-  border-left-color: transparent;
-}
-
-
-
-.note { 
-  height: $dotSize;
-  width: $dotSize;
-  border-radius: $dotSize / 2;
-  top: $cellHeight / 2;
-  line-height: $dotSize;
-  margin-top: ($cellHeight - $dotSize) / 2; // Difference between the cell height + dot height, halved
-  margin-left: $dotSize / -2; // shift it backwards half of the element's width
-  left: 50%;
-  background: $dotColor;
-  position: absolute;
-  text-align: center;
-  font-weight: 400;
-  color: $noteColor;
-  z-index: 1;
-  font-size: 0.875rem;
-}
-
-.note[data-interval='1'],
-.note.highlight {
-  background: $highlightBG;
-  color: $bodyBG;
-  font-weight: bold;
-}
-
-.note[data-interval='1'] {
-  @extend .waves;
-}
-
-.active { color: $bodyBG; background: yellow; }
-
-.key_selector a { display: inline-block; padding: 5px; }
-.scale_selector a { display: inline-block; padding: 5px; }
 
 

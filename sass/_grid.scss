@@ -39,7 +39,6 @@
             max-width: (6/12 * ($grid-max-width + $grid-gutter)) - $grid-gutter;
           }
 
-
           // Could use this, but it may breed inconsistency.
           //
           // @for $i from 1 through 11 {
@@ -47,8 +46,6 @@
           //     max-width: ($i/12 * ($grid-max-width + $grid-gutter)) - $grid-gutter;
           //   }
           // }
-          
-
 
 // Grid
 

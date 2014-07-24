@@ -88,7 +88,7 @@
             font-family: $font-monospace;
             font-size: $fs-s;
             border-radius: $border-radius;
-            background-color: $gray-lightest;
+            background-color: $gray-lighter;
           }
           
           code {
@@ -116,7 +116,7 @@
           strong, .bold { font-weight: $fw-bold; }
           .regular { font-weight: $fw-normal; }
           .italic { font-style: italic; }
-          .caps { text-transform: uppercase; }
+          .caps { text-transform: uppercase; letter-spacing: .25rem; }
 
       // Alignment Tweaks
 
@@ -132,3 +132,9 @@
           .lh-xl { line-height: $lh-xl; }
           .lh-xxl { line-height: $lh-xxl; }
           .lh-xxxl { line-height: $lh-xxxl; }
+
+      // Font Weight Tweaks
+      
+          .fw-black  { font-weight: $fw-black; }
+          .fw-bold   { font-weight: $fw-bold; }
+          .fw-normal { font-weight: $fw-normal; }
