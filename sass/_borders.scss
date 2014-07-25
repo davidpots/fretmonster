@@ -30,5 +30,7 @@
   border-left-color: $border-color;
 }
 
+.border--gray { border-color: $gray-lighter; }
+
 .rounded { border-radius: $border-radius; }
 .circle { border-radius: 50%; }

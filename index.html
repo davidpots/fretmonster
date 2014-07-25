@@ -24,7 +24,7 @@
     <div class="container">
       <h1 class="h1 caps center fw-black italic mtxl mbs">FretMonster!</h1>
       <p class="small center mbxl">Created by <a href="http://twitter.com/davidpots">@davidpots</a>. In progress.</p>
-      <p class="h3 center ptl">I'm hungry for a <a class="pam rounded mhs bg-orange white js-summonOverlay js-summonScalePicker" href="">penatonic minor</a> scale in the key of <a class="pam rounded mhs bg-orange white js-summonOverlay js-summonKeyPicker" href="">G</a></p>
+      <p class="h3 center ptl">I'm hungry for a <a class="pam rounded mhs orange border js-summonOverlay js-summonScalePicker" href="">penatonic minor</a> scale in the key of <a class="pvm phl rounded mhs orange border js-summonOverlay js-summonKeyPicker" href="">G</a></p>
     </div>
 
     <div class="js-scalePicker pal js-overlay bg-gray-light fixed js-fixed-center" style="display: none; overflow-y: scroll; z-index: 10; height: 300px;">
@@ -33,12 +33,19 @@
         <a class="right js-closeOverlay" href="#">close</a>
       </div>
       <ul class="list-reset js-scaleSelector">
-        <li class="h3"><a class="block pvm" data-scale-name="major" href="#">Major</a></li>
-        <li class="h3"><a class="block pvm" data-scale-name="minor_melodic" href="#">Minor (Melodic)</a></li>
-        <li class="h3"><a class="block pvm" data-scale-name="minor_harmonic" href="#">Minor (Harmonic)</a></li>
-        <li class="h3"><a class="block pvm" data-scale-name="minor_natural" href="#">Minor (Natural)</a></li>
-        <li class="h3"><a class="block pvm" data-scale-name="pentatonic_major" href="#">Pentatonic Major</a></li>
-        <li class="h3"><a class="block pvm" data-scale-name="pentatonic_minor" href="#">Pentatonic Minor</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="major" href="#">Major</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="minor_melodic" href="#">Minor (Melodic)</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="minor_harmonic" href="#">Minor (Harmonic)</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="minor_natural" href="#">Minor (Natural)</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="pentatonic_major" href="#">Pentatonic Major</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="pentatonic_minor" href="#">Pentatonic Minor</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="ionian_mode" href="#">Ionian mode</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="dorian_mode" href="#">Dorian mode</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="phrygian_mode" href="#">Phyrgian mode</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="lydian_mode" href="#">Lydian mode</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="mixolydian_mode" href="#">Mixolydian mode</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="aeolian_mode" href="#">Aeolian mode</a></li>
+        <li class="h3"><a class="block rounded pam" data-scale-name="locrian_mode" href="#">Locrian mode</a></li>
       </ul>
     </div>
 
@@ -48,23 +55,23 @@
         <a class="right js-closeOverlay" href="#">close</a>
       </div>
       <ul class="list-reset js-keySelector">
-        <li class="h3"><a class="block pvm" data-key-name="A" href="#">A</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="A#" href="#">A#</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="B" href="#">B</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="C" href="#">C</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="C#" href="#">C#</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="D" href="#">D</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="D#" href="#">D#</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="E" href="#">E</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="F" href="#">F</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="F#" href="#">F#</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="G" href="#">G</a></li>
-        <li class="h3"><a class="block pvm" data-key-name="G#" href="#">G#</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="A" href="#">A</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="A#" href="#">A#</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="B" href="#">B</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="C" href="#">C</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="C#" href="#">C#</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="D" href="#">D</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="D#" href="#">D#</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="E" href="#">E</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="F" href="#">F</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="F#" href="#">F#</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="G" href="#">G</a></li>
+        <li class="h3"><a class="block rounded pam" data-key-name="G#" href="#">G#</a></li>
       </ul>
     </div>
   
     <div class="fretboard_backdrop">
-      <div class="container--full">
+      <div class="container--full phn">
         <div class="fretboard_wrapper"></div>
       </div>
     </div>
@@ -72,20 +79,21 @@
   
   
     
-    <div class="container">
+    <div class="container--col-10 mtxl">
       
-      <div class="row">
-        <div class="col col-6">
-          <p class="center small">
-            <a class="inline-block pas rounded bg-gray-lighter gray-dark showIntervals active" href="">show intervals</a> / <a class="pas rounded bg-gray-lighter gray-dark showNotes" href="">show notes</a>
-          </p>
+        <div class="row">
+          <div class="col col-6">
+            <p class="center small">
+              <a class="inline-block pas border border--gray rounded bg-gray-lighter gray-dark showIntervals active" href="">show intervals</a> / <a class="pas rounded border border--gray bg-gray-lighter gray-dark showNotes" href="">show notes</a>
+            </p>
+          </div>
+          <div class="col col-6">
+            <p class="center small">
+              <a class="inline-block pas border border--gray rounded bg-gray-lighter gray-dark highlightRoot active" href="#">highlight root</a> / <a class="pas rounded border border--gray bg-gray-lighter gray-dark highlightTriads" href="">highlight triads</a>
+            </p>
+          </div>
         </div>
-        <div class="col col-6">
-          <p class="center small">
-            <a class="inline-block pas rounded bg-gray-lighter gray-dark highlightRoot active" href="#">highlight root</a> / <a class="pas rounded bg-gray-lighter gray-dark highlightTriads" href="">highlight triads</a>
-          </p>
-        </div>
-      </div>
+    
             
         <h4>About this project</h4>
         <p>Still pretty early in development, but I want to share progress. Test it out by clicking around above. So far, this is demonstrating the fundamental functionality that this project will use. Next on the list is some proper attention paid to visual design, cleaning up the code, making it work beautifully across all devices, and other tidbits relating to the overall product experience.</p>
@@ -99,6 +107,8 @@
           <li>Big CSS overhaul. Using a variant of the wonderful BASSCSS which I'm still implementing in places, but it's mostly there. Nasty inline styles are gone. Styling from here on out will be much easier and more organized.</li>
           <li>A bit more device-size-aware / responsive /etc.</li>
           <li>Brings in next wave of the design polish, made easier by leveraging SCSS variables a bit.</li>
+          <li>Adds a bunch of new scales -- the modes, mainly</li>
+          <li>Adds initial logic to check for interval exceptions, mainly that of b5 actually needing to be a 4# (as in the Lydian scale).
         </ul>
         <p>July 18, 2014</p>
         <ul>

@@ -43,7 +43,21 @@ var scales = {  'major'             : { 'name'    : 'major',
                 'pentatonic_major'  : { 'name'    : 'pentatonic major',
                                         'pattern' : 'o-o-o--o-o--' },
                 'pentatonic_minor'  : { 'name'    : 'pentatonic minor',
-                                        'pattern' : 'o--o-o-o--o-' }
+                                        'pattern' : 'o--o-o-o--o-' },
+                'ionian_mode'       : { 'name'    : 'ionian mode',
+                                        'pattern' : 'o-o-oo-o-o-o' },
+                'dorian_mode'       : { 'name'    : 'dorian mode',
+                                        'pattern' : 'o-oo-o-o-oo-' },
+                'phrygian_mode'     : { 'name'    : 'phrygian mode',
+                                        'pattern' : 'oo-o-o-oo-o-' },
+                'lydian_mode'       : { 'name'    : 'lydian mode',
+                                        'pattern' : 'o-o-o-oo-o-o' },
+                'mixolydian_mode'   : { 'name'    : 'mixolydian mode',
+                                        'pattern' : 'o-o-oo-o-oo-' },
+                'aeolian_mode'      : { 'name'    : 'aeolian mode',
+                                        'pattern' : 'o-oo-o-oo-o-' },
+                'locrian_mode'      : { 'name'    : 'locrian mode',
+                                        'pattern' : 'oo-o-oo-o-o-' }
               };
 
 var defaultKey = "E",
@@ -206,6 +220,7 @@ function tonify(scale) {
       scale[i] = '';
     }
   });
+  console.log(scale);
   return scale;
 }
 
@@ -291,12 +306,13 @@ function addTonesToFretboard() {
       }
     });
   });
+  
 }
 
 
 $(document).ready(function(){
 
-  $('.js-keySlector a[data-key-name="'+defaultKey+'"]').addClass('active');
+  $('.js-keySelector a[data-key-name="'+defaultKey+'"]').addClass('active');
   $('.js-summonKeyPicker').text(defaultKey);
 
   $('.js-scaleSelector a[data-scale-name="'+defaultScale.name+'"]').addClass('active');
@@ -341,6 +357,15 @@ $(window).on('load', function(){
             currentScale = scales[newScale];
             computeScaleTones(scales[newScale].pattern,currentKey,fretboardLength);
             addTonesToFretboard();
+            
+            // Check for rare chords w/ wacky intervals. Make into function?
+                // Lydian
+                if (newScale == 'lydian_mode') {
+                  $('.note[data-interval="b5"]').attr('data-interval','4#');
+                  if ( showingIntervals == true ) {
+                    $('.note[data-interval="b5"]').text('4#');
+                  }
+                }
 
             // Put into function
             $('body').removeClass('oh');
@@ -408,20 +433,5 @@ $(window).on('load', function(){
             return false;
           });
           
-          // 
-          // $('.show135').click(function(){
-          //   $('.note[data-active="true"]').each(function(i,obj){
-          //     if ( ($(obj).attr('data-interval') == "3") || ($(obj).attr('data-interval') == "5") || ($(obj).attr('data-interval') == "b3") || ($(obj).attr('data-interval') == "1")) {
-          //       $(this).toggleClass('highlight');
-          //     }
-          //   });
-          //   if ( showingTriads == true ) {
-          //     showingTriads = false;
-          //   } else {
-          //     showingTriads = true;
-          //   }
-          //   $(this).toggleClass('active');
-          //   return false;
-          // });
           
 });

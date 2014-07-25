@@ -54,10 +54,10 @@ $stringWidth: 3px;
           position: relative;
          	_overflow: auto;
          	margin: 0 0 1em; 
-          padding: 2.5em 0 5.5em; }
+          padding: 2.5em 0 3.5em; }
            
            // so the main fretboard is on same row as the string labels. Probably hacky but okay for now.
-           .fretboard { position: absolute; left: 2rem; }
+           .fretboard { position: absolute; left: 3rem; }
          
          /* These next two lines add the scrollbar before you scroll (if overflow is present) */
           .table_wrapper::-webkit-scrollbar {
@@ -83,6 +83,7 @@ td {
 
 table.string_labels {
   float: left;
+  margin-left: 1.5rem;
   .cell {
     height: $cellHeight;
     width: $cellWidth / 2;
@@ -166,7 +167,7 @@ table.string_labels {
   @extend .waves;
 }
 
-.active { color: $white; background: $orange; }
+.active { color: $orange; background: $white; border: 2px solid $border-color; }
 
 .key_selector a { display: inline-block; padding: 5px; }
 .scale_selector a { display: inline-block; padding: 5px; }
