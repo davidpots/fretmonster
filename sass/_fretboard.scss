@@ -1,7 +1,7 @@
 // Colors
 
 $stringColor: #ccc;
-$fretColor: fade-out(#39716e, 0.5);
+$fretColor: fade-out($stringColor, 0.5);
 $dotColor: $stringColor;
 $noteColor: black;
 $highlightBG: $orange;
@@ -49,7 +49,7 @@ $stringWidth: 3px;
 
         /* Makes the table scrollable, if overflows */
          .fretboard_wrapper {
-         	max-width: 1160px;
+         	max-width: 1161px;
          	overflow-y: auto;
           position: relative;
          	_overflow: auto;
