@@ -49,11 +49,11 @@ $stringWidth: 3px;
 
         /* Makes the table scrollable, if overflows */
          .fretboard_wrapper {
-         	width: 100%;
+         	max-width: 1160px;
          	overflow-y: auto;
           position: relative;
          	_overflow: auto;
-         	margin: 0 0 1em; 
+         	margin: 0 auto 1em; 
           padding: 2.5em 0 3.5em; }
            
            // so the main fretboard is on same row as the string labels. Probably hacky but okay for now.
