@@ -20,3 +20,8 @@
 
 
 
+@media screen and (max-width: 767px) {
+  .mobile-show,
+  .mobile-block  { display: block !important; }
+  .mobile-block  { width: 100%; }
+}
