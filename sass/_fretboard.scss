@@ -168,6 +168,7 @@ table.string_labels {
 }
 
 .active { color: $orange; background: $white; border: 2px solid $border-color; }
+.active--toggle { background: $orange; color: #fff; }
 
 .key_selector a { display: inline-block; padding: 5px; }
 .scale_selector a { display: inline-block; padding: 5px; }
