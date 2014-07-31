@@ -106,23 +106,7 @@ var grid = {},
                 10 : '6',
                 11 : 'b7',
                 12 : '7'
-              },
-    stringDiff = {
-                    // Kinda hacky, but this is constant/fixed. The value represents the number of tones this string is different from the E string.
-                    1 : 0,  // E string (high)
-                    2 : 5,  // B string        
-                    3 : 9,  // G string
-                    4 : 2,  // D string
-                    5 : 7,  // A string
-                    6 : 0   // E string (low)
-                 };
-
-// -----------------------------------------------------------------------------
-// Generates the fretboard HTML.
-//
-// - Number of rows is dynamic based on the instrument selected.
-// - Used by the generateFretboard() function
-// -----------------------------------------------------------------------------
+              };
 
 
 
@@ -149,6 +133,7 @@ function generateFretboard() {
   // Append the empty Fretboard wrapper to the DOM
   $('.fretboard_wrapper').empty();
 
+  // Generates the HTML for the fretboard, dynamic based on instrument # of strings/etc.
   var fretboardHTML =  '<div class="table_wrapper">\n';
       fretboardHTML += '<table class="string_labels">\n';
   for (var i = 0; i < currentInstrument.numStrings; i++) {
