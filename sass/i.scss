@@ -25,3 +25,18 @@
   .mobile-block  { display: block !important; }
   .mobile-block  { width: 100%; }
 }
+
+.js-overlay {
+  width: 300px;
+  border-radius: $border-radius;
+}
+
+.has-scrollbars::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px; }
+
+.has-scrollbars::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	border: 6px solid #eee;
+	background-color: #bbb; }
