@@ -1,11 +1,11 @@
-  var instruments = {  
+  var instruments = {
                        'guitar' : { 'name'         : 'guitar',
                                     'numStrings'   : 6,
                                     'fretsToLabel' : [1,3,5,7,9,12,15],
                                     'stringLabels' : ['E','B','G','D','A','E'],
                                     'stringDiff'   : {
                                                         1 : 0,  // E string (high)
-                                                        2 : 5,  // B string        
+                                                        2 : 5,  // B string
                                                         3 : 9,  // G string
                                                         4 : 2,  // D string
                                                         5 : 7,  // A string
@@ -20,6 +20,16 @@
                                                         2 : 2,  // D string
                                                         3 : 7,  // A string
                                                         4 : 0   // E string
+                                                      } },
+                       'mandolin'   : { 'name'         : 'mandolin',
+                                    'numStrings'   : 4,
+                                    'fretsToLabel' : [1,3,5,7,9,12,15],
+                                    'stringLabels' : ['E','A','D','G'],
+                                    'stringDiff'   : {
+                                                        1 : 0,  // E string
+                                                        2 : 7,  // A string
+                                                        3 : 2,  // D string
+                                                        4 : 9   // G string
                                                       } },
                        'ukulele' : { 'name'         : 'ukulele',
                                      'numStrings'   : 4,
@@ -74,7 +84,7 @@ var defaultKey = "E",
 var fretboardLength = 18;
 var grid = {},
     notes = [ 'E','F','F#','G','G#','A','A#','B','C','C#','D','D#' ],
-    keyDiff = { 
+    keyDiff = {
                 'E'  : 0,
                 'F'  : 1,
                 'F#' : 2,
@@ -112,10 +122,10 @@ var grid = {},
 
 
 function rearrange(toSplit,divider) {
-  
+
   // Splits an array, shifts rear portion (after "divider") to the front
   // Universal function, used throughout the app.
-  
+
   var backLop = [],
       frontLop = [],
       combined = [];
@@ -127,7 +137,7 @@ function rearrange(toSplit,divider) {
 
 
 function generateFretboard() {
-  
+
   // Create & populate the placeholder & empty fretboard HTML
 
   // Append the empty Fretboard wrapper to the DOM
@@ -147,9 +157,9 @@ function generateFretboard() {
       fretboardHTML += '<tr class="legend"></tr>\n';
       fretboardHTML += '</table>\n';
       fretboardHTML += '</div>';
-  
+
   console.log(currentInstrument.numStrings);
-  
+
   $('.fretboard_wrapper').append(fretboardHTML);
 
   // Prime the HTML that each fret/cell will be filled with
@@ -158,7 +168,7 @@ function generateFretboard() {
   // Apply the fret/cell HTML into each string
   $('.fretboard .string').each(function(i,string){
     for (var i = 0; i <= fretboardLength; i++) {
-      $(string).append(cellHTML);  
+      $(string).append(cellHTML);
     }
     $(string).find('.cell').each(function(cellNum,cellObj){
       if ( cellNum == 0 ) {
@@ -169,7 +179,7 @@ function generateFretboard() {
       if ( cellNum == fretboardLength) {
         $(cellObj).addClass('fret--trailer');
       }
-    });      
+    });
   });
 
   // Apply the fret number row beneath all strings
@@ -183,17 +193,17 @@ function generateFretboard() {
   $('.fret_marker').empty();
   var showFrets = currentInstrument.fretsToLabel;
   $(showFrets).each(function(i,obj){
-    $('.fret--fretNum[data-fret-num='+ obj +']').show();  
+    $('.fret--fretNum[data-fret-num='+ obj +']').show();
   });
 
 }
 
 
 function tonify(scale) {
-  
+
   // Convert the scale's "o" and "-" blips into the intervals per that scale.
   // Example: "o-o-oo-o-o-o" becomes ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"]
-  
+
   // Convert scale string to an array
   scale = scale.split('');
   // Iterate through each tone
@@ -219,12 +229,12 @@ function computeScaleTones(scale,key,length) {
 
   // Convert the scale's blip pattern into key-agnostic intervals
   scale = tonify(scale);
-  
+
   // Convert the tones in tonified scale to be as they'd appear on the E string, starting at fret 0
   // For example, a major scale in the key of G would be converted
   // from ["1", "", "2", "", "3", "4", "", "5", "", "6", "", "7"] to ["6", "", "7", "1", "", "2", "", "3", "4", "", "5", ""]
   scale = rearrange( scale, (12 - keyDiff[key]) );
-  
+
   // Populate each string with the scale, adjusted for variable string tone
   for (var i = 1; i <= currentInstrument.numStrings; i++) {
     var fullString = rearrange(scale, (12 - currentInstrument.stringDiff[i]) );
@@ -237,15 +247,15 @@ function computeScaleTones(scale,key,length) {
 
 
 function addTonesToFretboard() {
-  
+
   // Remoe any existing notes, in case user is generating a new scale
   $('.fretboard .note').remove();
-  
+
   // Set the core HTML that each tone/interval gets
   var noteHTML = '<div class="note"></div>';
-  
+
   var dotHTML;
-  
+
   // Go through each string, add the tones/intervals where appropriate
   $('.fretboard .string').each(function(stringNum,stringObj){
 
@@ -264,7 +274,7 @@ function addTonesToFretboard() {
     });
 
     // Give each active fret its absolute note...
-    var extendedNotes = notes.concat(notes);    
+    var extendedNotes = notes.concat(notes);
     extendedNotes = rearrange(extendedNotes,(12 - currentInstrument.stringDiff[stringNum+1]));
     $(stringObj).find('.fret').each(function(fretNum,fretObj){
       $(fretObj).find('.note').attr('data-note', extendedNotes[fretNum]);
@@ -280,7 +290,7 @@ function addTonesToFretboard() {
         }
         if ( showingIntervals == true ) {
           dotHTML = gridObj;
-        } 
+        }
         if ( highlightingTriads == true ) {
           var x = $(stringObj).find('.fret').eq(gridNum).find('.note');
           if ( ($(x).attr('data-interval') == "3") || ($(x).attr('data-interval') == "5") || ($(x).attr('data-interval') == "b3") || ($(x).attr('data-interval') == "1")) {
@@ -292,7 +302,7 @@ function addTonesToFretboard() {
       }
     });
   });
-  
+
 }
 
 
@@ -306,7 +316,7 @@ $(document).ready(function(){
 
   // Generate the placeholder Fretboard wrapper
   generateFretboard();
-  
+
   // Give the user a pre-canned scale to start with.
   computeScaleTones(defaultScale.pattern,defaultKey,fretboardLength);
   addTonesToFretboard();
@@ -332,7 +342,7 @@ $(window).on('load', function(){
 
             return false;
           })
-  
+
   // Scale Changer!
 
           $('.js-scaleSelector a').click(function(){
@@ -342,7 +352,7 @@ $(window).on('load', function(){
             currentScale = scales[newScale];
             computeScaleTones(scales[newScale].pattern,currentKey,fretboardLength);
             addTonesToFretboard();
-            
+
             // Check for rare chords w/ wacky intervals. Make into function?
                 // Lydian
                 if (newScale == 'lydian_mode') {
@@ -360,7 +370,7 @@ $(window).on('load', function(){
           })
 
   // Instrument Changer!
-  
+
           $('.js-instrumentSelector a').click(function(){
             $('.js-instrumentSelector a').removeClass('active--toggle');
             $(this).addClass('active--toggle');
@@ -373,6 +383,6 @@ $(window).on('load', function(){
             }
             return false;
           });
-          
-          
+
+
 });

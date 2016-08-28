@@ -16,7 +16,7 @@
     <script src="javascript/jquery.js"></script>
     <script src="javascript/main.js"></script>
     <script src="javascript/interaction.js"></script>
-    
+
 
   </head>
   <body>
@@ -27,7 +27,7 @@
       <p class="small center mbxl">Created by <a href="http://twitter.com/davidpots">@davidpots</a>. In progress.</p>
       <p class="h3 center"><span class="mobile-block">I'm hungry for a</span> <span class="mobile-block"><a class="inline-block pam mvm rounded mhs orange border js-summonOverlay js-summonScalePicker" href="">penatonic minor</a></span> <span class="mobile-block">scale in the key of</span> <span class="mobile-block"><a class="inline-block mvm pvm phl rounded mhs orange border js-summonOverlay js-summonKeyPicker" href="">G</a></span></p>
       <p class="center small js-instrumentSelector">
-        <a data-instrument="guitar" class="phs pvxs inline-block active--toggle" href="">guitar</a> | <a data-instrument="ukulele" class="phs pvxs inline-block" href="">ukulele</a> | <a data-instrument="bass" class="phs pvxs inline-block" href="">bass</a>
+        <a data-instrument="guitar" class="phs pvxs inline-block active--toggle" href="">guitar</a> | <a data-instrument="ukulele" class="phs pvxs inline-block" href="">ukulele</a> | <a data-instrument="bass" class="phs pvxs inline-block" href="">bass</a> | <a data-instrument="mandolin" class="phs pvxs inline-block" href="">mandolin</a>
       </p>
       <p class="center small">
         <a class="phs pvxs inline-block showIntervals active--toggle" href="">show intervals</a> | <a class="phs pvxs inline-block showNotes" href="">show notes</a>
@@ -80,23 +80,27 @@
         <li class="h3"><a class="block rounded pam" data-key-name="G#" href="#">G#</a></li>
       </ul>
     </div>
-  
+
     <div class="fretboard_backdrop">
       <div class="container--full phn">
         <div class="fretboard_wrapper"></div>
       </div>
     </div>
-    
-  
-  
-    
-    <div class="container--col-10 mtxl">            
+
+
+
+
+    <div class="container--col-10 mtxl">
         <h4 class="mtxxl">About this project</h4>
         <p>Still pretty early in development, but I want to share progress. Test it out by clicking around above. So far, this is demonstrating the fundamental functionality that this project will use. Next on the list is some proper attention paid to visual design, cleaning up the code, making it work beautifully across all devices, and other tidbits relating to the overall product experience.</p>
         <p>You might be interested in my original <a href="http://davidpots.com/blog/guitar-fretboard-ascii-svg/">fretboard project</a>, which tackles this same scale problem from the POV of chords. I'll probably get back to this approach one day, though I'd keep it as chord-only (whereas FretMonster will likely be scale-only).
         <p>Finally, you should also check out <a href="http://songnotes.cc">Songnotes</a>, my personalized collection of hand-crafted guitar tabs/chords/lyrics/notes.</p>
-      
+
         <h4 class="mtxl">Change Log</h4>
+        <p>Aig 28, 2016</p>
+        <ul>
+          <li>Added mandolin!</li>
+        </ul>
         <p>July 31, 2014</p>
         <ul>
           <li>Adds support for ukulele and bass! As part of this, some refactoring of the Javascript was done which allows me to add more instruments (and tunings) as I wish. Instuments are <a href="https://gist.github.com/davidpots/fe9d5eae4f86970bda55">stored in JSON format</a>, where each instrument has a unique number of strings, string notes, frets-to-label (i.e., the dots on the fretboard), etc. This keeps the fretboard-generating logic properly instrument agnostic, which it definitely was not before.</li>
@@ -132,13 +136,13 @@
         <ul>
           <li>Got the JS-powered scale changing engine working, hurrah!</li>
         </ul>
-    
+
       <hr />
       <p><a href="https://github.com/davidpots/fretmonster">View this project on GitHub</a> | <a href="http://twitter.com/davidpots">Follow me on Twitter</a></p>
-    
-      
+
+
       </div>
-      
+
     </div>
 
   </body>
