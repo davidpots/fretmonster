@@ -50,10 +50,14 @@ var scales = {  'major'             : { 'name'    : 'major',
                                         'pattern' : 'o-oo-o-oo--o' },
                 'minor_natural'     : { 'name'    : 'natural minor',
                                         'pattern' : 'o-oo-o-oo-o-' },
-                'pentatonic_major'  : { 'name'    : 'pentatonic major',
+                'pentatonic_major'  : { 'name'    : 'pentatonic (major)',
                                         'pattern' : 'o-o-o--o-o--' },
-                'pentatonic_minor'  : { 'name'    : 'pentatonic minor',
+                'pentatonic_minor'  : { 'name'    : 'pentatonic (minor)',
                                         'pattern' : 'o--o-o-o--o-' },
+                'blues_major'       : { 'name'    : 'blues (major)',
+                                        'pattern' : 'o-ooo--o-o--' },
+                'blues_minor'       : { 'name'    : 'blues (minor)',
+                                        'pattern' : 'o--o-ooo--o-' },
                 'ionian_mode'       : { 'name'    : 'ionian mode',
                                         'pattern' : 'o-o-oo-o-o-o' },
                 'dorian_mode'       : { 'name'    : 'dorian mode',
@@ -248,7 +252,7 @@ function computeScaleTones(scale,key,length) {
 
 function addTonesToFretboard() {
 
-  // Remoe any existing notes, in case user is generating a new scale
+  // Remove any existing notes, in case user is generating a new scale
   $('.fretboard .note').remove();
 
   // Set the core HTML that each tone/interval gets
